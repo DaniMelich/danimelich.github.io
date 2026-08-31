@@ -28,8 +28,8 @@
 <section class="hero">
 <div class="hero-copy">
 <h1>I build games, and the AI that builds games.</h1>
-<p class="sub">Gameplay programmer with titles live on both app stores. Overnight, my
-sixteen-agent fleet writes production code into a commercial Unity game.</p>
+<p class="sub">Gameplay programmer with titles live on both app stores. Overnight, the
+sixteen-agent fleet I built writes production code into my commercial Unity game.</p>
 <div class="cta">
 <a class="btn btn-solid" href="#agent-fleet">See the fleet</a>
 <a class="btn btn-line" href="https://play.google.com/store/apps/details?id=com.somnigamestudios.stepland">Play Stepland</a>
@@ -43,25 +43,27 @@ sixteen-agent fleet writes production code into a commercial Unity game.</p>
 <section id="agent-fleet" class="sec sec-fleet reveal">
 <div class="stat">
 <span class="stat-num">107</span>
-<span class="stat-label">commits merged into a live game in a single day, each one
+<span class="stat-label">commits the fleet merged into my game in one day, each one
 through a gate I designed</span>
 </div>
 <div class="sec-copy">
 <h2>While I sleep, sixteen agents ship my game.</h2>
-<p>The fleet runs overnight against Dungeon Heroes, the commercial Unity game I build.
-Its lanes are not guesses: a co-change analysis of the repository's history decides
-which files actually move together, so agents never collide. One serial lane owns the
-Unity scenes; four parallel worktrees carry everything else.</p>
-<p>Every agent reports back in the same fixed contract: branch, files touched, what to
-verify, a confidence level, and anything it noticed outside its scope. Those findings
-become the next night's issues, so the fleet feeds itself work. Checks run cheapest
-first, and a single human gate survives, because what a screen looks like on a real
-device is information no pipeline holds.</p>
+<p>I build Dungeon Heroes, a commercial Unity game, and I wanted it to keep being
+built after I stopped for the day. So I built a fleet: sixteen agents that run
+overnight against the production repository. I did not guess at how to divide the
+work between them. I ran a co-change analysis over the repository's history to learn
+which files actually move together, gave the Unity scenes one serial lane, and spread
+everything else across four parallel worktrees. The agents never collide.</p>
+<p>I made every agent report back in the same fixed contract: branch, files touched,
+what to verify, a confidence level, and anything it noticed outside its scope. Those
+findings become the next night's issues, so the fleet feeds itself work. I run the
+checks cheapest first, and I kept exactly one human gate, because what a screen looks
+like on a real device is information no pipeline holds.</p>
 <p>Agents turn model spend into an operating cost, so I measured it like one and bent
-the curve: the expensive high-context share of the bill fell from 42.0% to 12.1%. And
-when I auditioned local models for the cheap end of the routing, I wrote them an eval
-with a hard 0.95 accuracy bar first. They scored 77.5% and 85.0%. They did not get
-the job.</p>
+the curve: I drove the expensive high-context share of the bill from 42.0% down to
+12.1%, clearing the 20% bar with room to spare. And when I auditioned local models
+for the cheap end of the routing, I wrote them an eval with a hard 0.95 accuracy bar
+first. They scored 77.5% and 85.0%. I did not give them the job.</p>
 </div>
 </section>
 <section id="ui-harness" class="band reveal">
@@ -70,34 +72,37 @@ the job.</p>
 <p class="band-num">-162,256 <span>lines, removed in one commit</span></p>
 </div>
 <div class="band-copy">
-<p>Before the fleet there was a 35,000-line pipeline that turned written briefs into
+<p>Before the fleet, I built a 35,000-line pipeline that turned written briefs into
 working Unity screens through typed contracts and five human gates. It shipped real
-screens into the game, and it priced its own work: $67 to $98 per accepted screen,
-with every rerun billed to whatever caused it.</p>
-<p>Then its own telemetry delivered the verdict: the expensive validator half had zero
-confirmed true positives across 730 findings while carrying about half the spend. So
-it went, 1,240 files in one commit, and verification moved onto ground truth: the
-compiler, the filesystem, the live scene. The fleet is what took its place, and it
-ships more with a fraction of the machinery. Anyone can build a system. The job is
-reading the ledger honestly enough to unbuild one.</p>
+screens into the game, and I made it price its own work: $67 to $98 per accepted
+screen, with every rerun billed to whatever caused it.</p>
+<p>Then I read the ledger it kept, and the ledger was blunt: the expensive validator
+half had zero confirmed true positives across 730 findings while carrying about half
+the spend. So I deleted it, 1,240 files in one commit, and moved verification onto
+ground truth: the compiler, the filesystem, the live scene. I built the fleet in its
+place, and it ships more with a fraction of the machinery. Anyone can build a system.
+The job is reading the ledger honestly enough to unbuild one.</p>
 </div>
 </section>
 <section id="stepland" class="sec split reveal">
 <div class="sec-copy">
 <p class="kicker">Stepland · Godot · one of three core programmers · live on both stores</p>
 <h2>The whole game runs on one number. It was failing.</h2>
-<p>Stepland turns real-world walking into a Tamagotchi-style pet, so every currency,
-streak, and reward sits downstream of one number: the steps the player took. That
-number arrived through a third-party health hub that could report connected while
-delivering zero. To a player, that is the game being broken at first launch.</p>
-<p>I proposed reading the Android pedometer directly, then built the replacement in a
-week, in Kotlin, a language I had never written: the sensor reader, the background
-worker that keeps steps accruing with the app closed, the Godot to Android bridge.
-One permission prompt, no second-app setup, no silent zeroes. Stable ever since.</p>
-<p>Same energy on deadlines: I rebuilt the tutorial as 82 declarative, resumable steps
-and landed it on the opening day of the 4YFN showcase, driving coding-agent sessions
-inside the production repository. And before any screen gets drawn, I block it out and
-the artist dresses it. The shipped game keeps my skeletons.</p>
+<p>I was one of three core programmers on Stepland, a game that turns real-world
+walking into a Tamagotchi-style pet. Every currency, streak, and reward sits
+downstream of one number: the steps the player took. And that number arrived through
+a third-party health hub that could report connected while delivering zero, which to
+a player is the game being broken at first launch.</p>
+<p>I proposed cutting the dependency and reading the Android pedometer directly. Then
+I built the replacement in a week, in Kotlin, a language I had never written: the
+sensor reader, the background worker that keeps steps accruing with the app closed,
+the bridge from Godot to Android. One permission prompt, no second-app setup, no
+silent zeroes. It has been stable ever since.</p>
+<p>I brought the same speed to deadlines. I rebuilt the tutorial as 82 declarative,
+resumable steps and landed it on the opening day of the 4YFN showcase, driving
+coding-agent sessions inside the production repository. And before a screen got
+drawn, I blocked it out and the artist dressed it. The shipped game keeps my
+skeletons.</p>
 <div class="cta">
 <a class="btn btn-line" href="https://play.google.com/store/apps/details?id=com.somnigamestudios.stepland">Google Play</a>
 <a class="btn btn-line" href="https://apps.apple.com/gb/app/stepland/id6749793290">App Store</a>
@@ -118,38 +123,51 @@ up while it resolves. A parry pays energy back.</figcaption>
 <p class="kicker">Dungeon Heroes · Unity · C# · solo</p>
 <h2>A full free-to-play game, built by one person.</h2>
 <p>The fight is what players see. What decides survival is everything they never
-notice, and those are the systems solo projects usually skip. I built them: damage
-resolves through an ordered stage pipeline, which is how 174 spells can reach into the
-same hit and the catalogue keeps growing, and the combat is tuned in tenths of a
-second, where every timing is an authored constant with a name.</p>
-<p>Chest odds live in tables a designer wrote, with a pity floor you can reason about.
-Save files are versioned and migrated, never overwritten, and a migration that runs
-twice cannot pay its rewards twice. My favourite detail: the balance analyzer refuses
-runs recorded on my own dev machine, because the developer is the least representative
-player there is. The game does not trust me, by design.</p>
-<p>Carried to signed Android release builds with the store compliance done, and built
-at fleet speed: the sixteen agents above write into this repository every night.</p>
+notice, the systems solo projects usually skip, and I built every one of them. I
+resolve damage through an ordered stage pipeline, which is how 174 spells can reach
+into the same hit while the catalogue keeps growing. I tune the combat in tenths of
+a second, and every timing in it is an authored constant with a name.</p>
+<p>I put chest odds in tables a designer could write, with a pity floor you can
+reason about. I version and migrate save files, never overwrite them, and I made sure
+a migration that runs twice cannot pay its rewards twice. My favourite decision: the
+balance analyzer refuses runs recorded on my own dev machine, because the developer
+is the least representative player there is. I built the game not to trust me.</p>
+<p>I carried it to signed Android release builds with the store compliance done, and
+I build it at fleet speed: the sixteen agents above write into this repository every
+night.</p>
 </div>
 </section>
 <section id="purple-pwny" class="sec narrow reveal">
 <p class="kicker">Purple Pwny · C# · Unity · 2023 to 2024</p>
 <h2>I gave the game a player. In 2024.</h2>
 <p>A roguelike's balance question is how an item performs in the hands of someone
-good, and no human plays ten thousand dungeons. So I wrote DunAI: 552 lines, delivered
-in one commit, a hand-authored decision agent that plays the dungeon crawler
-competently, so balance could be measured against skilled play instead of random
-rolls. Rules, not a learned policy, on purpose: when a number comes out strange, you
-read the file and see exactly why.</p>
-<p>The same job shipped the Seashore biome, its boss, and about twenty relics designed
-from nothing but a name and an icon, plus a betting game whose race is computed
-backwards from a predetermined winner and still plays as a race. It is all
-<a href="https://degendungeons.com/crawler">playable in the browser</a>.</p>
+good, and no human plays ten thousand dungeons. So I wrote DunAI: 552 lines,
+delivered in one commit, a hand-authored decision agent that plays the dungeon
+crawler competently. From that commit on, balance was measured against skilled play
+instead of random rolls. I built it as rules, not a learned policy, on purpose: when
+a number comes out strange, you read the file and see exactly why.</p>
+<p>On the same job I shipped the Seashore biome, its boss, and about twenty relics I
+designed from nothing but a name and an icon, plus a betting game whose race I
+compute backwards from a predetermined winner and which still plays as a race. It is
+all <a href="https://degendungeons.com/crawler">playable in the browser</a>.</p>
+</section>
+<section id="story" class="sec narrow reveal">
+<h2>I taught myself everything on this page.</h2>
+<p>I left school at seventeen and learned to program on my own: C# first, then Unity,
+then game design from books, courses, and whatever I was building at the time. Over
+the next six years I built more than fifteen prototypes, each in a different genre.
+I would start a project, drive it to a working prototype, then deliberately stop and
+start again somewhere new. That was my curriculum: every kind of system on this page,
+I had already built in miniature before anyone paid me to build one for real.</p>
+<p>Three years ago the prototypes became a profession. The rest is above: a team
+credit live on both app stores, a commercial free-to-play game of my own, and a
+fleet of agents that ships it while I sleep.</p>
 </section>
 <section id="contact" class="close reveal">
 <h2>Let's talk.</h2>
-<p>I'm Dani: Barcelona, remote-first, EU citizen, available now. Spanish, Catalan,
-and English. Grandmaster in Teamfight Tactics, so yes, I take game systems
-personally.</p>
+<p>I'm Dani: Barcelona, EU citizen, available now, in Spanish, Catalan, and English.
+Remote suits me, and so does your office. Grandmaster in Teamfight Tactics, so yes,
+I take game systems personally.</p>
 <div class="cta">
 <a class="btn btn-solid" href="mailto:dani.caballero.m@gmail.com">Email me</a>
 <a class="btn btn-line" href="/cv/dani-caballero-melich-ai-engineer-remote-designed.pdf">AI Engineer CV</a>

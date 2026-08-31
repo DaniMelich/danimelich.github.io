@@ -50,7 +50,7 @@ body {
   overflow-x: hidden;
 }
 
-img { max-width: 100%; height: auto; display: block; }
+img, video { max-width: 100%; height: auto; display: block; }
 
 a { color: var(--accent-ink); text-decoration: none; }
 p a { text-decoration: underline; text-underline-offset: 3px; }
@@ -325,7 +325,7 @@ p.kicker, .sec-copy p.kicker, .narrow p.kicker {
   gap: 0.9rem;
 }
 
-.pair-imgs img {
+.pair-imgs img, .pair-imgs video {
   width: 100%;
   aspect-ratio: 9 / 17;
   object-fit: cover;
@@ -340,7 +340,7 @@ figcaption {
   color: var(--muted);
 }
 
-.solo-shot img {
+.solo-shot img, .solo-shot video {
   width: min(100%, 330px);
   margin-inline: auto;
   border-radius: 26px;
