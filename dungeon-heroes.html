@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dani Mélich</title>
-<meta name="description" content="Dani Mélich, gameplay programmer in Barcelona. His game Dungeon Heroes, the AI team that works on it, and the studio games before it.">
+<title>Dungeon Heroes, in full</title>
+<meta name="description" content="Dungeon Heroes: a real-time roguelike for one thumb, and the systems under it, by Dani Mélich.">
 <meta name="color-scheme" content="dark light">
-<meta property="og:title" content="Dani Mélich">
-<meta property="og:description" content="Dani Mélich, gameplay programmer in Barcelona. His game Dungeon Heroes, the AI team that works on it, and the studio games before it.">
+<meta property="og:title" content="Dungeon Heroes, in full">
+<meta property="og:description" content="Dungeon Heroes: a real-time roguelike for one thumb, and the systems under it, by Dani Mélich.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -107,10 +107,6 @@ h1, h2, h3 { font-weight: 700; letter-spacing: -0.03em; line-height: 1.04; text-
 .btn:active { transform: translateY(1px) scale(0.98); }
 .btn-solid { background: var(--accent); color: var(--on-accent); }
 .btn-solid:hover { opacity: 0.9; }
-.btn-ai { background: var(--ai); color: var(--on-accent); }
-.btn-game { background: var(--game); color: var(--on-accent); }
-.btn-ai:hover, .btn-game:hover { opacity: 0.9; }
-@media (prefers-color-scheme: light) { .btn-ai, .btn-game { color: #ffffff; } }
 .btn-line { color: var(--ink); border: 1px solid var(--line); }
 .btn-line:hover { border-color: var(--ink); opacity: 1; }
 .btn-mini, .top-nav .btn-mini {
@@ -122,13 +118,13 @@ h1, h2, h3 { font-weight: 700; letter-spacing: -0.03em; line-height: 1.04; text-
 /* hero */
 .hero {
   min-height: 100dvh; max-width: 1240px; margin: 0 auto;
-  padding: clamp(5rem, 10vh, 7rem) clamp(1.25rem, 4vw, 3rem) 4rem;
+  padding: clamp(6rem, 14vh, 9rem) clamp(1.25rem, 4vw, 3rem) 4rem;
   display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   align-items: center; gap: clamp(2rem, 5vw, 4rem);
 }
-.hero h1 { font-size: clamp(2.2rem, 4.2vw, 3.35rem); max-width: 22ch; }
-.hero .sub { margin-top: 1.2rem; font-size: clamp(1rem, 1.5vw, 1.15rem); color: var(--muted); max-width: 52ch; }
-.hero .cta { margin-top: 1.6rem; }
+.hero h1 { font-size: clamp(2.5rem, 5.6vw, 4.4rem); max-width: 14ch; }
+.hero .sub { margin-top: 1.4rem; font-size: clamp(1.05rem, 1.6vw, 1.25rem); color: var(--muted); max-width: 44ch; }
+.hero .cta { margin-top: 2.2rem; }
 .hero-shots { position: relative; min-height: clamp(380px, 52vw, 620px); }
 .phone { position: absolute; border-radius: 26px; border: 1px solid var(--line); box-shadow: var(--shadow); }
 .phone-a { width: min(58%, 300px); top: 4%; left: 2%; transform: rotate(-4deg); z-index: 1; }
@@ -158,7 +154,7 @@ p.kicker { color: var(--accent-ink); font-weight: 500; font-size: 0.95rem; margi
 .band .sec { padding-block: clamp(4.5rem, 11vh, 7rem); }
 
 .split { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: clamp(2.5rem, 6vw, 5.5rem); align-items: center; }
-.split.flip { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: start; }
+.split.flip { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
 .split.start { align-items: start; }
 
 .pair-imgs { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
@@ -169,8 +165,7 @@ p.kicker { color: var(--accent-ink); font-weight: 500; font-size: 0.95rem; margi
 .phones-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.9rem; }
 .phones-row .loop, .phones-row img { box-shadow: var(--shadow); width: 100%; aspect-ratio: 9 / 17; object-fit: cover; object-position: center; }
 figcaption { margin-top: 0.9rem; font-size: 0.92rem; color: var(--muted); }
-.map { border-radius: var(--r-media); border: 1px solid var(--line); box-shadow: var(--shadow); filter: brightness(1.32) contrast(1.06); }
-@media (prefers-color-scheme: light) { .map { filter: none; } }
+.map { border-radius: var(--r-media); border: 1px solid var(--line); box-shadow: var(--shadow); }
 
 .narrow { max-width: 760px; }
 .narrow p { margin-top: 1.4rem; color: var(--muted); }
@@ -187,8 +182,8 @@ figcaption { margin-top: 0.9rem; font-size: 0.92rem; color: var(--muted); }
 .fine a:hover { color: var(--ink); }
 
 /* story pages */
-.story-head { max-width: 880px; margin: 0 auto; padding: clamp(7rem, 16vh, 10rem) clamp(1.25rem, 4vw, 3rem) 1rem; }
-.story-head h1 { font-size: clamp(2.3rem, 5vw, 3.9rem); max-width: 18ch; }
+.story-head { max-width: 976px; margin: 0 auto; padding: clamp(7rem, 16vh, 10rem) clamp(1.25rem, 4vw, 3rem) 1rem; }
+.story-head h1 { font-size: clamp(2.1rem, 4.4vw, 3.4rem); max-width: 31ch; }
 .story-head .sub { margin-top: 1.3rem; color: var(--muted); font-size: 1.1rem; max-width: 52ch; }
 .back { display: inline-block; margin-bottom: 1.4rem; color: var(--muted); font-size: 0.95rem; font-weight: 500; }
 .back:hover { color: var(--ink); opacity: 1; }
@@ -355,20 +350,14 @@ html.anim .reveal.in { opacity: 1; transform: none; }
 .list li { padding-left: 0.15rem; }
 .list li::marker { color: var(--accent-ink); }
 .list b { color: var(--ink); font-weight: 600; }
-.facts { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.2rem; padding: 0; font-family: var(--mono); font-size: 0.78rem; line-height: 1.5; }
-.facts li { border: 1px solid var(--line); border-radius: 8px; padding: 0.28rem 0.7rem; color: var(--muted); background: var(--mech-bg); }
-.facts b { color: var(--ink); font-weight: 600; margin-right: 0.45rem; }
-.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; margin-top: 2.5rem; }
-.card { border: 1px solid var(--line); border-radius: var(--r-media); padding: 1.6rem 1.7rem 1.7rem; background: var(--bg-band); box-shadow: var(--shadow); display: flex; flex-direction: column; }
-.card h3 { margin-top: 0.2rem; }
-.card .list { margin-top: 1.2rem; max-width: none; }
-.card .tags { margin-top: 1.3rem; font-family: var(--mono); }
-.card .cta { margin-top: auto; padding-top: 1.5rem; }
-.mech-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 1.4rem; align-items: start; }
-.pairs-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; margin-top: 1.4rem; }
-@media (max-width: 900px) { .cards, .mech-row, .pairs-row { grid-template-columns: 1fr; } }
-.sec-tail { max-width: 1240px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem) clamp(4.5rem, 11vh, 8rem); }
-.sec-tail .mech { margin-top: -1.5rem; }
+.beat-side .list { max-width: none; }
+.beat.wide .inner > p { margin-top: 2.2rem; }
+.hands { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+.hands h4 { font-size: 0.76rem; font-weight: 500; color: var(--muted); margin-bottom: 0.45rem; }
+.hands h4.game { color: var(--game); } .hands h4.ai { color: var(--ai); }
+.hands ul { list-style: none; padding: 0; display: grid; gap: 0.2rem; }
+.hands li::before { content: '\2022  '; color: var(--muted); }
+@media (max-width: 900px) { .hands { grid-template-columns: 1fr; } }
 @media (max-width: 600px) {
   .bar { grid-template-columns: 1fr auto; gap: 0.35rem 0.8rem; }
   .bar .lbl { grid-column: 1 / -1; margin-bottom: -0.1rem; }
@@ -380,213 +369,212 @@ html.anim .reveal.in { opacity: 1; transform: none; }
   .mech { font-size: 0.76rem; }
   .phones-row { grid-template-columns: 1fr 1fr; }
 }
-/* v3.8 · one section per screen, soft snap between them */
-.hero { scroll-snap-align: start; }
-.byline { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 1.2rem; }
-.byline img { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; border: 2px solid var(--line); box-shadow: 0 0 0 3px var(--bg); }
-.byline span { font-size: 0.92rem; line-height: 1.35; color: var(--muted); }
-.byline b { color: var(--ink); font-weight: 600; }
-.phone-b { top: 50%; bottom: auto; translate: 0 -50%; }
-.screen > .wrap { max-width: 1240px; margin: 0 auto; width: 100%; padding: clamp(3.5rem, 9vh, 5.5rem) clamp(1.25rem, 4vw, 3rem); }
-.screen h2 { font-size: clamp(1.75rem, min(3.4vw, 5.4vh), 2.7rem); max-width: 38ch; text-wrap: balance; }
-.screen h2 .h2-tail { display: inline-block; }
-.screen p.kicker { margin-bottom: 0.7rem; }
-.screen .cols { margin-top: clamp(1.4rem, 3.6vh, 2.6rem); }
-.screen .sec-copy > :first-child { margin-top: 0; }
-.screen .sec-copy p { margin-top: 1em; }
-.screen .list { margin-top: 0.9em; gap: 0.45em; }
-.screen .sec-copy .cta { margin-top: 1.5em; }
-.screen figcaption { margin-top: 0.7rem; }
-
-.closing { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(2rem, 6vw, 5rem); align-items: center; }
-.closing figure { text-align: center; }
-.closing img { width: clamp(200px, min(26vw, 42vh), 340px); aspect-ratio: 1; border-radius: 50%; object-fit: cover; border: 2px solid var(--line); box-shadow: var(--shadow); margin: 0 auto; }
-.closing figcaption { line-height: 1.45; margin-top: 1.1rem; }
-.closing figcaption b { display: block; color: var(--ink); font-weight: 600; font-size: 1.02rem; }
-.screen .closing h2 { font-size: clamp(2rem, min(4vw, 6.4vh), 3.2rem); max-width: none; }
-.closing h2 span.ln { display: block; }
-.closing .cta { margin-top: 2em; }
-.closing .btn { font-size: 1.05rem; padding: 0.95em 1.9em; }
-.closing .fine { margin-top: 1.6em; font-size: 0.95rem; color: var(--muted); }
-.closing .fine + .fine { margin-top: 0.5em; }
-
-@media (min-width: 901px) and (min-height: 620px) {
-  html { scroll-snap-type: y proximity; }
-  .screen { min-height: 100dvh; display: flex; align-items: center; scroll-snap-align: start; font-size: clamp(0.94rem, 2.1vh, 1.0625rem); }
-  .screen > .wrap { padding-top: 4.4rem; padding-bottom: 1.4rem; }
-  .screen .pair-imgs { max-width: calc(60vh + 0.9rem); }
-  .screen .pairs { max-width: calc(58vh + 0.9rem); }
-  .hero { padding-top: 4.6rem; padding-bottom: 1.6rem; }
-  /* the v3.5 composition (phones overlapping, the game over the streak screen), scaled to the window height */
-  .hero-shots { min-height: 0; height: min(100dvh - 7.5rem, 52vw, 700px); aspect-ratio: 0.82; max-width: 100%; justify-self: center; }
-  .phone-a { width: auto; height: 96%; top: 2%; left: 2%; }
-  .phone-b { width: auto; height: 72%; right: 4%; }
-}
-@media (max-width: 900px) {
-  .closing { grid-template-columns: 1fr; }
-  .closing figure { text-align: left; }
-  .closing img { margin: 0; }
-  .screen .closing h2 { font-size: clamp(1.4rem, 6.6vw, 2.4rem); }
-}
 </style>
 </head>
 <body>
 <header class="top">
-<a class="wordmark" href="#top">Dani Mélich</a>
+<a class="wordmark" href="index.html">Dani Mélich</a>
 <nav class="top-nav">
+<a class="back-top" href="index.html">Overview</a>
 <a href="https://github.com/DaniMelich">GitHub</a>
 <a href="https://www.linkedin.com/in/dani-caballero-melich">LinkedIn</a>
-<a class="btn btn-mini" href="#contact">Contact</a>
+<a class="btn btn-mini" href="index.html#contact">Contact</a>
 </nav>
 </header>
 <main id="top">
 
-<section class="hero">
-<div class="hero-copy">
-<div class="byline"><img src="media/dani-720.jpg" width="720" height="720" alt="Dani Caballero Mélich"><span><b>Dani Caballero Mélich</b><br>Gameplay programmer · Barcelona</span></div>
-<h1>I build <span class="w-game">games</span>. And the <span class="w-ai">AI team</span> that ships them.</h1>
-<p class="sub">I'm a gameplay programmer in Barcelona. I've worked at two game studios, and one of those games, Stepland, is live on both app stores. Now I'm making my own mobile game, Dungeon Heroes. To keep up with it I set up a team of AI agents: AI models that each do one job, like programming or building menus. Every hour the team takes on the next tasks, and it brings the big decisions to me.</p>
-<div class="cta">
-<a class="btn btn-ai" href="#agents">The AI team</a>
-<a class="btn btn-game" href="#dungeon-heroes">Dungeon Heroes</a>
-</div>
-</div>
-<div class="hero-shots">
-<img class="phone phone-a" src="media/screenshot_streak.jpeg" width="720" height="1600" alt="Stepland's streak screen, live on both stores">
-<img class="phone phone-b" src="media/combat-screen-dev-capture-2026-07-17.png" width="348" height="700" alt="Dungeon Heroes combat: four cycling cards, an energy meter, an enemy winding up">
-</div>
-</section>
+<header class="story-head">
+<a class="back" href="index.html#dungeon-heroes">&larr; Back to the overview</a>
+<h1><span class="w-game">Dungeon Heroes</span>: a mobile action game where you fight through a dungeon with spell cards.</h1>
+<p class="sub">You fight your way down a dungeon in real time, one floor after another. When your hero falls you start again from the top and build the hero differently; games like this are called roguelikes. I've been making it since 2025. The design, the code and the art were mine alone until August 2026, when the AI team I set up joined in. It stands at signed Android release builds, store-ready.</p>
+</header>
 
-<section id="agents" class="screen reveal">
-<div class="wrap">
-<p class="kicker">The AI team · built for Dungeon Heroes · since August 2026</p>
-<h2>An <span class="w-ai">AI team</span> works on my game every hour. I make the big decisions.</h2>
-<div class="cols split">
-<div class="sec-copy">
-<p>Dungeon Heroes is a lot of game for one person, so I set up a team of AI agents. Each agent is an AI model (Anthropic's Claude) with one written job, like programming, building menus or game design. A manager agent runs the team.</p>
-<p>Every hour the manager picks the next tasks, hands them out, and checks every change that comes back before it goes into the game. When a decision comes up, the manager sorts it by what a mistake would cost:</p>
+<section class="beat wide reveal">
+<div class="inner">
+<div class="beat-side">
+<div>
+<h2>While you cast a spell, you can't defend yourself. The whole fight is built on that one <span class="w-game">rule</span>.</h2>
+<p>Your spells are cards. Cast one, and your hero is committed until the spell goes off: no blocking, no parrying.</p>
 <ul class="list">
-<li><b>Something it can check itself</b> · like whether a change broke the game. The manager handles it, and tells me afterwards.</li>
-<li><b>A matter of taste</b> · how something should look or feel. The manager writes up the options and the one it would pick, and I choose.</li>
-<li><b>Something expensive to get wrong</b> · prices, the store page, save files. The manager never decides those; they wait for me.</li>
+<li>Four cards cycle through your hand, so what you can do next is always changing and always visible.</li>
+<li>A cast costs energy, plus the time in which you can't defend, from under half a second for a quick slash to a second and a half for a big heal. So every cast is a small gamble that no attack lands before it's done.</li>
+<li>You defend with a well-timed tap. For the Knight, one of the four heroes, that's the parry. Every enemy shows when it's about to attack; tap at the right moment and you block the hit and gain energy. Miss, and you take the hit.</li>
 </ul>
-<div class="cta">
-<a class="btn btn-solid" href="agents.html">How the AI team works</a>
 </div>
-</div>
-<div class="mech term" data-run data-start="14:02" data-end="14:57" aria-label="One hour of the AI team, as a log">
-<div class="mech-bar"><span>a typical hour of the AI team</span><b class="clock">14:02</b></div>
-<ol>
-<li><span class="t">14:02</span><span class="who">manager</span>starts the hour · checks the game still runs</li>
-<li><span class="t">14:03</span><span class="who">manager</span>picks up the two answers Dani left</li>
-<li><span class="t">14:05</span><span class="who">manager</span>hands out four tasks, one per agent</li>
-<li><span class="t">14:31</span><span class="who">programmer</span>done · manager tests it, adds it to the game</li>
-<li><span class="t">14:38</span><span class="who">designer</span>a taste question · three options for Dani</li>
-<li><span class="t">14:52</span><span class="who">menu builder</span>unsure of its work · held back for Dani</li>
-<li class="sum"><span class="t">14:57</span>hour done · 2 new things waiting for Dani</li>
-</ol>
-</div>
-</div>
-</div>
-</section>
-
-<section id="dungeon-heroes" class="screen band reveal">
-<div class="wrap">
-<p class="kicker">Dungeon Heroes · my own game · 2025 to now · Unity · Android</p>
-<h2><span class="h2-tail"><span class="w-game">Dungeon Heroes</span>: a mobile action game</span> <span class="h2-tail">where you fight through a dungeon</span> <span class="h2-tail">with spell cards.</span></h2>
-<div class="cols split flip">
-<figure>
-<div class="pair-imgs">
-<video class="loop" autoplay muted loop playsinline preload="metadata" poster="media/02-combat.jpg" aria-label="Dungeon Heroes combat on floor six, hits landing">
+<figure class="visual">
+<div class="phones-row">
+<video class="loop" autoplay muted loop playsinline preload="metadata" poster="media/01-title-to-floor.jpg" aria-label="Title screen into the first floor">
+<source src="media/01-title-to-floor.webm" type="video/webm">
+<source src="media/01-title-to-floor.mp4" type="video/mp4">
+</video>
+<video class="loop" autoplay muted loop playsinline preload="metadata" poster="media/02-combat.jpg" aria-label="A combat exchange on floor six">
 <source src="media/02-combat.webm" type="video/webm">
 <source src="media/02-combat.mp4" type="video/mp4">
 </video>
-<video class="loop" autoplay muted loop playsinline preload="metadata" poster="media/04-parry.jpg" aria-label="A parry landing in Dungeon Heroes">
+</div>
+</figure>
+</div>
+<p>One attempt at the dungeon is called a run. You clear a floor, pick an upgrade and go down to the next, and somewhere along the way you find a relic, a rare item that changes the rules for the rest of the run. On a phone your eyes are on the enemy, not on your cards, so every enemy shows what it's about to do, and shows it long enough for you to react.</p>
+</div>
+<figure class="visual">
+<div class="phones-row">
+<video class="loop" autoplay muted loop playsinline preload="metadata" poster="media/03-pick-an-upgrade.jpg" aria-label="Rewards, then the pick-an-upgrade choice">
+<source src="media/03-pick-an-upgrade.webm" type="video/webm">
+<source src="media/03-pick-an-upgrade.mp4" type="video/mp4">
+</video>
+<video class="loop" autoplay muted loop playsinline preload="metadata" poster="media/04-parry.jpg" aria-label="The parry landing, blue flash">
 <source src="media/04-parry.webm" type="video/webm">
 <source src="media/04-parry.mp4" type="video/mp4">
 </video>
+<video class="loop" autoplay muted loop playsinline preload="metadata" poster="media/05-floor-transition.jpg" aria-label="An upgrade, a fade, the next floor">
+<source src="media/05-floor-transition.webm" type="video/webm">
+<source src="media/05-floor-transition.mp4" type="video/mp4">
+</video>
+<img src="media/cards-relics.png" width="360" height="800" alt="Floor nine: a relic on offer, one tap from Confirm" loading="lazy" decoding="async" style="border-radius:var(--r-media);border:1px solid var(--line)">
 </div>
+<figcaption>Picking an upgrade, a parry (the blue flash), going down to the next floor, and a relic on offer.</figcaption>
 </figure>
-<div class="sec-copy">
-<p>You fight your way down a dungeon in real time, one floor after another. When your hero falls you start again from the top and build the hero differently; games like this are called roguelikes.</p>
-<p>Your spells are cards, four in your hand at a time. While you cast one you can't defend yourself, so a big spell hits hard but leaves you open to the enemy's next attack.</p>
-<p>The Knight, one of four heroes, defends with a parry: every enemy shows when it's about to attack, and if you tap at the right moment you block the hit and gain energy, which is what spells cost.</p>
-<p>There are 174 spells, 52 status effects (lasting conditions such as bleeding) and 38 relics, rare items that change the rules, so no two attempts play out the same.</p>
-<p>The design, the code and the art were mine alone until the AI team joined in August 2026. It stands at signed Android release builds, store-ready.</p>
-<div class="cta">
-<a class="btn btn-solid" href="dungeon-heroes.html">More about Dungeon Heroes</a>
+</section>
+
+<section class="beat reveal">
+<h2>174 spells, 52 status effects and 38 relics can all change a <span class="w-game">hit</span>, so every hit is worked out in one fixed order.</h2>
+<p>Every spell, status effect (a lasting condition such as bleeding) and relic can change how much a hit hurts. With this many of them, the usual approach, one "take damage" function with a special case for each, becomes unreadable after a handful.</p>
+<p>So a hit goes through a line of stages, always in the same order. It carries one running number, the damage still left; each stage gets its turn to change that number, and any part of the game that needs the final damage just reads it at the end.</p>
+<p>A new status effect is one more stage at a known place in the line, not another special case in a tangle of code nobody wants to check.</p>
+<div class="visual">
+<div class="mech" aria-label="The staged damage pipeline">
+<div class="mech-bar"><span>damage · one hit, in order</span><b class="g">174 spells · 52 statuses · 38 relics</b></div>
+<div class="mech-body">
+<div class="flow">
+<span class="stage">hit</span><span class="arrow">&rarr;</span>
+<span class="stage hot">attacker buffs</span><span class="arrow">&rarr;</span>
+<span class="stage hot">target statuses</span><span class="arrow">&rarr;</span>
+<span class="stage hot">block</span><span class="arrow">&rarr;</span>
+<span class="stage">armour</span><span class="arrow">&rarr;</span>
+<span class="stage">shield</span><span class="arrow">&rarr;</span>
+<span class="stage">health</span><span class="arrow">&rarr;</span>
+<span class="stage hot">relics</span><span class="arrow">&rarr;</span>
+<span class="stage res">result</span>
+</div>
+<div class="reach">
+<span>the original hit is never edited; each stage only changes the running number, the damage still left</span>
+<span>the Knight's parry goes to the very front of the line and cancels every stage after it</span>
+<span>a hero's own abilities slot in as extra stages next to an existing one, without touching the others</span>
+<span>a relic such as Vicious Blade acts last, but can still see the hit's original damage from before the block reduced it</span>
 </div>
 </div>
 </div>
 </div>
 </section>
 
-<section id="stepland" class="screen reveal">
-<div class="wrap">
-<p class="kicker">Stepland · Somni Game Studios · Godot · 2025 to 2026</p>
-<h2><span class="w-game">Stepland</span>: a pet that grows when you walk.</h2>
-<div class="cols split">
-<div class="sec-copy">
-<p>Stepland turns healthy habits into a game. The steps you walk, the water you drink, your meditation and exercise all feed a Tamagotchi-like pet. It's free to play, and live on Google Play and the App Store.</p>
-<p>I was one of its three main programmers. Three things I built:</p>
-<ul class="list">
-<li><b>Step counting</b> · on Android, players first had to install and set up a second app before their steps counted. I replaced that with a plug-in that reads the phone's own step counter, so there's nothing extra to install. I wrote it in Kotlin, Android's language, in a week, and it has been stable since.</li>
-<li><b>The tutorial</b> · 82 steps stored as data rather than written into the code, so the team can change it easily, and if you close the app halfway it picks up where you left off.</li>
-<li><b>Screen layouts</b> · I built each screen first as a rough version without final art, so the team could agree on changes while they were still cheap to make. One is shown here, next to the finished screen.</li>
-</ul>
-<div class="cta">
-<a class="btn btn-line" href="https://play.google.com/store/apps/details?id=com.somnigamestudios.stepland">Stepland on Google Play</a>
+<section class="beat reveal">
+<h2>Saved <span class="w-game">progress</span> is built to survive updates. A save file the game doesn't fully understand is refused, not guessed at.</h2>
+<p>When an update changes what a save file holds, old saves have to be converted. Some updates remove upgrades that were bought with the game's own currency, so the conversion refunds them, and it must refund once, not every time the game starts.</p>
+<p>So every save carries a version number and moves forward step by step, v1 to v4 so far during development, and each step is tested to be safe to run twice.</p>
+<p>A save written by a newer version of the game is refused outright rather than half-read. That happens when someone has the game on two devices and only one has updated: the older game would drop the parts it doesn't know, and its next save would overwrite the real progress.</p>
+<div class="visual">
+<div class="mech" aria-label="Save migration ladder">
+<div class="mech-bar"><span>save file · one step per version</span><b>safe to run twice</b></div>
+<div class="mech-body">
+<div class="ladder">
+<div class="rung"><span class="v">v1</span><span>first version · three upgradeable talents, bought with Echoes, the game's currency</span></div>
+<div class="rung"><span class="v">v2</span><span>talents become a board of 57 · everything already spent is refunded in full <span class="ok">&check;</span></span></div>
+<div class="rung"><span class="v">v3</span><span>three stats retired and refunded at their old prices, which are stored in the converter because the price list itself is being retired <span class="ok">&check;</span></span></div>
+<div class="rung"><span class="v">v4</span><span>chest keys re-sorted by type and tier · old untyped keys become Common <span class="ok">&check;</span></span></div>
+<div class="rung refused"><span class="v">v5</span><span>from a newer version · <span class="warn">refused, not half-read</span></span></div>
 </div>
 </div>
-<figure class="pairs">
-<img src="media/stepland-level-selection.png" width="512" height="850" alt="Dani's structural blockout of Stepland's level-select screen" loading="lazy" decoding="async">
-<img src="media/screenshot_memory.jpeg" width="720" height="1600" alt="The same screen in the live game, dressed with final art" loading="lazy" decoding="async">
-<figcaption>My rough layout on the left, the finished screen on the right.</figcaption>
-</figure>
 </div>
 </div>
 </section>
 
-<section id="degen-crawler" class="screen band reveal">
-<div class="wrap">
-<p class="kicker">Degen Crawler · Purple Pwny · Unity · 2023 to 2024 · a three-person remote studio</p>
-<h2><span class="w-game">Degen Crawler</span>: I built an AI player that plays thousands of dungeons to check that no item is too strong.</h2>
-<div class="cols split flip">
-<div class="mech" aria-label="The balance agent, step by step">
-<div class="mech-bar"><span>one item test</span><b class="g">an expert system</b></div>
+<section class="beat reveal">
+<div class="beat-side">
+<div>
+<h2>Bad luck has a limit: open enough <span class="w-game">chests</span> and the good drop is guaranteed.</h2>
+<p>Chests drop items by chance, from a table of odds I wrote for each chest type. Items come in rarities, such as Rare and Legendary. To put a limit on bad luck, the game counts the chests you open and guarantees a Rare within 10 and a Legendary within 40; games call this pity. Each chest also advertises one Legendary as its featured item, and when a guaranteed Legendary comes up, a coin flip decides whether it's that one.</p>
+<p>A guarantee only raises the worst you can get. Every open is still a roll of the dice, and you can still get lucky above it.</p>
+</div>
+<div class="visual">
+<div class="mech" aria-label="Authored odds">
+<div class="mech-bar"><span>chest odds · one open, three stages</span><b>odds &rarr; pity &rarr; featured</b></div>
 <div class="mech-body">
 <dl class="kv">
-<dt>input</dt><dd>an item's new stats</dd>
-<dt>the player</dt><dd>the AI: it scores every possible move with rules I wrote, and takes the best one</dd>
-<dt>it plays</dt><dd>thousands of dungeons per test</dd>
-<dt>output</dt><dd>how the item did, and the reason behind every move</dd>
+<dt>odds</dt><dd>a table I wrote, one per chest type</dd>
+<dt>pity</dt><dd>a Rare within 10 opens, a Legendary within 40, a Signature (the top rarity) within 200 · the highest guarantee due wins, and it raises the minimum you can get</dd>
+<dt>featured</dt><dd>a 50/50 on whether a guaranteed Legendary is the one the chest advertises</dd>
+<dt>on screen</dt><dd>the distance to the next guarantee, always: "Legendary in 12"</dd>
+<dt>saving</dt><dd>opening a chest spends the key, moves the counter and uses up the guarantee in a single save, or none of it happens</dd>
 </dl>
 </div>
 </div>
-<div class="sec-copy">
-<p>Degen Crawler is a dungeon game where players stake real money on each attempt, and win or lose it depending on how well they play. That makes the strength of every item a money question: if an item is too strong, the studio pays out more than it takes in, and nobody can play thousands of dungeons by hand to check.</p>
-<p>So I built an AI player: a program that plays the game the way a strong human would. It's a classic kind of AI called an expert system. Its strategy is written by hand, rule by rule, from how I play the game myself, so every move it makes can be read and explained.</p>
-<p>Give it an item's new stats and it plays thousands of dungeons, then reports how the item did and why.</p>
-<p>I also designed and built about twenty relics, each starting from just a name and an icon, and a new dungeon area with six enemies and a status effect of its own.</p>
+</div>
+</div>
+</section>
+
+<section class="beat reveal">
+<div class="beat-side">
+<div class="visual">
+<div class="mech" aria-label="Balance analyzer">
+<div class="mech-bar"><span>balance tool · where a run came from</span><b>counted?</b></div>
+<div class="mech-body">
+<dl class="kv">
+<dt>a phone</dt><dd class="ok">counted</dd>
+<dt>the Unity editor</dt><dd class="warn">dropped</dd>
+<dt>a development computer</dt><dd class="warn">dropped</dd>
+<dt>anything unrecognised</dt><dd class="warn">dropped · treated as a development computer</dd>
+</dl>
+</div>
+</div>
+</div>
+<div>
+<h2>When I balance the game, <span class="w-game">runs</span> from my development computer don't count.</h2>
+<p>The game records how each run went, and a tool I wrote reads those records to tune the numbers. It drops any run recorded in the Unity editor or on a development computer, and counts only runs played on a phone, the way the game is meant to be played.</p>
+<p>A developer's test runs at the desk are many, and nothing like a real playthrough, so they would skew every number the tool produces.</p>
+</div>
+</div>
+</section>
+
+<section class="beat wide reveal">
+<div class="inner">
+<div class="beat-side">
+<div>
+<h2>Every <span class="w-game">timing</span> in the fight is a number I can change.</h2>
+<p>I did the game's art as well as its code, and its characters move through more than five hundred animation clips.</p>
+<p>They go through tools I wrote inside the Unity editor: one assembles a character's full set of animations from its sprite sheets (the image files that hold the frames), others check the timings.</p>
+<p>The feel of the fight lives in a few named numbers: how long a cast holds you in place, how long an enemy signals its attack, how long you have to parry.</p>
+<p>So when the parry feels too easy, there is a number to change rather than a feeling to argue about.</p>
+<p>The game is in English and Spanish, and its <a href="https://danimelich.com/dungeonheroes-legal/privacy-policy.html">privacy policy</a>, <a href="https://danimelich.com/dungeonheroes-legal/data-deletion.html">data-deletion page</a> and release procedure are written.</p>
+</div>
+<figure class="visual">
+<div class="phones-row">
+<video class="loop" autoplay muted loop playsinline preload="metadata" poster="media/06-relic-confirm.jpg" aria-label="Picking a relic and confirming it">
+<source src="media/06-relic-confirm.webm" type="video/webm">
+<source src="media/06-relic-confirm.mp4" type="video/mp4">
+</video>
+<img src="media/combat-screen.png" width="360" height="800" alt="The combat screen: the hero, two enemies and the four-card hand" loading="lazy" decoding="async" style="border-radius:var(--r-media);border:1px solid var(--line)">
+</div>
+<figcaption>Choosing a relic, and the combat screen: the hero, two enemies and the four-card hand.</figcaption>
+</figure>
+</div>
+<div class="visual mech" aria-label="Who wrote what">
+<div class="mech-bar"><span>who wrote what · the AI team joined in August 2026</span><b class="g">the final say stays mine</b></div>
+<div class="mech-body">
+<div class="hands">
+<div><h4 class="game">by hand · 2025 to August 2026</h4><ul><li>damage stages</li><li>parry timing</li><li>balance tool</li><li>save format through v3</li></ul></div>
+<div><h4 class="ai">with the AI team · since August 2026</h4><ul><li>the shop you visit between runs</li><li>chest keys sorted by type, and the save conversion from v3 to v4</li><li>relic reworks</li><li>latest round of work on the combat screen</li></ul></div>
+<div><h4>stays with me, on purpose</h4><ul><li>the design: agents propose, I decide</li><li>how it feels on a device</li><li>the final say on what goes in</li></ul></div>
+</div>
+<p class="k" style="margin-top:1rem">The AI team's manager reads and tests every change before it goes into the game, and the costly ones wait for me. <a href="agents.html">How the AI team works</a> is its own page.</p>
 </div>
 </div>
 </div>
 </section>
 
-<section id="contact" class="screen reveal">
-<div class="wrap closing">
-<figure>
-<img src="media/dani-720.jpg" width="720" height="720" alt="Dani Caballero Mélich" loading="lazy" decoding="async">
-<figcaption><b>Dani Caballero Mélich</b>Gameplay programmer · Barcelona</figcaption>
-</figure>
-<div>
-<h2><span class="ln">Making a <span class="w-game">game</span>?</span> <span class="ln">Building with <span class="w-ai">AI agents</span>?</span> <span class="ln">I'd like to hear about it.</span></h2>
+<section class="story-end reveal">
 <div class="cta">
-<a class="btn btn-solid" href="mailto:dani.caballero.m@gmail.com">Contact me</a>
-</div>
-<p class="fine">Or write to <a href="mailto:dani.caballero.m@gmail.com">dani.caballero.m@gmail.com</a>. I'm open to gameplay programming and AI engineering roles, in Barcelona or remote. EU citizen.</p>
-<p class="fine"><a href="https://github.com/DaniMelich">GitHub</a> · <a href="https://www.linkedin.com/in/dani-caballero-melich">LinkedIn</a></p>
-</div>
+<a class="btn btn-line" href="agents.html">How the AI team works</a>
+<a class="btn btn-line" href="index.html">Back to the overview</a>
 </div>
 </section>
 </main>
@@ -652,6 +640,37 @@ window.addEventListener('load', function () {
       });
     }, { threshold: 0.35 });
     tio.observe(term);
+  });
+
+  /* 82-step tutorial strip */
+  document.querySelectorAll('.steps[data-count]').forEach(function (strip) {
+    var n = +strip.getAttribute('data-count') || 82, at = +strip.getAttribute('data-at') || 0;
+    var frag = document.createDocumentFragment();
+    for (var i = 1; i <= n; i++) {
+      var s = document.createElement('i');
+      if (i < at) s.className = 'done'; else if (i === at) s.className = 'now';
+      s.title = 'step ' + i;
+      frag.appendChild(s);
+    }
+    strip.appendChild(frag);
+  });
+
+  /* pedometer: counts while on screen */
+  document.querySelectorAll('.pedo[data-tick]').forEach(function (card) {
+    var out = card.querySelector('.big');
+    if (!out) return;
+    var n = 0;
+    out.textContent = '0';
+    if (reduce || !hasIO) return;
+    var timer = null;
+    function tick() { n += 1; out.textContent = n.toLocaleString('en-GB'); }
+    var pio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting && !timer) timer = setInterval(tick, 520);
+        else if (!e.isIntersecting && timer) { clearInterval(timer); timer = null; }
+      });
+    }, { threshold: 0.4 });
+    pio.observe(card);
   });
 })();
 </script>
