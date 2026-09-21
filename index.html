@@ -127,6 +127,7 @@ h1, h2, h3 { font-weight: 700; letter-spacing: -0.03em; line-height: 1.04; text-
   align-items: center; gap: clamp(2rem, 5vw, 4rem);
 }
 .hero h1 { font-size: clamp(2.2rem, 4.2vw, 3.35rem); max-width: 22ch; }
+.hero .sub + .sub { margin-top: 0.75rem; }
 .hero .sub { margin-top: 1.2rem; font-size: clamp(1rem, 1.5vw, 1.15rem); color: var(--muted); max-width: 52ch; }
 .hero .cta { margin-top: 1.6rem; }
 .hero-shots { position: relative; min-height: clamp(380px, 52vw, 620px); }
@@ -161,11 +162,31 @@ p.kicker { color: var(--accent-ink); font-weight: 500; font-size: 0.95rem; margi
 .split.flip { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: start; }
 .split.start { align-items: start; }
 
-.pair-imgs { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+.pair-imgs { display: grid; grid-template-columns: repeat(12, 1fr); align-items: start; }
+.pair-imgs > :first-child { grid-column: 1 / 8; grid-row: 1; z-index: 2; box-shadow: var(--shadow); }
+.pair-imgs > :last-child { grid-column: 7 / 13; grid-row: 1; z-index: 1; margin-top: 26%; opacity: 0.96; }
 .pair-imgs img, .pair-imgs video, .loop {
   width: 100%; aspect-ratio: 9 / 17; object-fit: cover; object-position: top;
   border-radius: var(--r-media); border: 1px solid var(--line); background: #000;
 }
+.deck { position: relative; width: 100%; aspect-ratio: 1.08 / 1; margin-inline: auto; container-type: size; }
+.deck > * {
+  position: absolute; left: 50%; top: 50%; height: min(100cqh, 92cqw); width: auto; aspect-ratio: 9 / 17;
+  object-fit: cover; object-position: top;
+  border-radius: var(--r-media); border: 1px solid var(--line); background: #000;
+  opacity: 0; z-index: 0; pointer-events: none;
+  transform: translate(-50%, -50%) translateX(105%) scale(0.62);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease, filter 0.6s ease;
+}
+.deck:not(.js) > :first-child, .deck > .is-center { transform: translate(-50%, -50%); opacity: 1; z-index: 3; box-shadow: var(--shadow); }
+.deck:not(.js) > :nth-child(3), .deck > .is-left { transform: translate(-50%, -50%) translateX(-62%) scale(0.8); opacity: 1; z-index: 2; filter: brightness(0.62); pointer-events: auto; cursor: pointer; }
+.deck:not(.js) > :nth-child(2), .deck > .is-right { transform: translate(-50%, -50%) translateX(62%) scale(0.8); opacity: 1; z-index: 2; filter: brightness(0.62); pointer-events: auto; cursor: pointer; }
+.deck > .is-out { transform: translate(-50%, -50%) translateX(-105%) scale(0.62); opacity: 0; z-index: 1; }
+@media (prefers-reduced-motion: reduce) { .deck > * { transition: none; } }
+.zig { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(1.6rem, 4.5vh, 3rem) clamp(2.5rem, 6vw, 5.5rem); align-items: center; }
+.zig > * { min-width: 0; }
+.shot-wide { margin: 0; }
+.shot-wide img { display: block; width: 100%; height: auto; border-radius: var(--r-media); border: 1px solid var(--line); box-shadow: var(--shadow); }
 .phones-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.9rem; }
 .phones-row .loop, .phones-row img { box-shadow: var(--shadow); width: 100%; aspect-ratio: 9 / 17; object-fit: cover; object-position: center; }
 figcaption { margin-top: 0.9rem; font-size: 0.92rem; color: var(--muted); }
@@ -239,6 +260,14 @@ figcaption { margin-top: 0.9rem; font-size: 0.92rem; color: var(--muted); }
 .term li .who { color: var(--muted); margin-right: 0.6em; }
 .term li.sum { color: var(--accent-ink); margin-top: 0.4rem; }
 .term li.pending { opacity: 0; transform: translateY(9px); filter: blur(3px); }
+
+/* four business rules */
+.principles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 2.2rem; }
+.principle { border: 1px solid var(--line); border-radius: var(--r-media); padding: 1.2rem 1.25rem 1.3rem; background: var(--bg); }
+.principle b { display: block; line-height: 1.25; letter-spacing: -0.01em; }
+.principle p { margin-top: 0.6rem; color: var(--muted); font-size: 0.95rem; line-height: 1.55; }
+@media (max-width: 1000px) { .principles { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .principles { grid-template-columns: 1fr; } }
 
 /* key: value rows */
 .kv { display: grid; grid-template-columns: max-content 1fr; gap: 0.25rem 1rem; }
@@ -338,9 +367,10 @@ html.anim .reveal.in { opacity: 1; transform: none; }
   .hero-shots { min-height: 0; height: clamp(340px, 90vw, 460px); }
   .phone-a { width: min(52%, 250px); left: 4%; }
   .phone-b { width: min(44%, 210px); right: 6%; }
-  .split, .split.flip { grid-template-columns: 1fr; }
+  .split, .split.flip, .zig { grid-template-columns: 1fr; }
   .split.flip > :first-child { order: 2; }
   .pair-imgs { max-width: 440px; }
+  .deck { max-width: 460px; }
   .beat-side { grid-template-columns: 1fr; }
   .mech-grid { grid-template-columns: 1fr; }
   .roster { grid-template-columns: repeat(2, 1fr); }
@@ -355,6 +385,7 @@ html.anim .reveal.in { opacity: 1; transform: none; }
 .list li { padding-left: 0.15rem; }
 .list li::marker { color: var(--accent-ink); }
 .list b { color: var(--ink); font-weight: 600; }
+.sec-copy p b, .sub b { color: var(--ink); font-weight: 600; }
 .facts { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.2rem; padding: 0; font-family: var(--mono); font-size: 0.78rem; line-height: 1.5; }
 .facts li { border: 1px solid var(--line); border-radius: 8px; padding: 0.28rem 0.7rem; color: var(--muted); background: var(--mech-bg); }
 .facts b { color: var(--ink); font-weight: 600; margin-right: 0.45rem; }
@@ -391,7 +422,7 @@ html.anim .reveal.in { opacity: 1; transform: none; }
 .screen h2 { font-size: clamp(1.75rem, min(3.4vw, 5.4vh), 2.7rem); max-width: 38ch; text-wrap: balance; }
 .screen h2 .h2-tail { display: inline-block; }
 .screen p.kicker { margin-bottom: 0.7rem; }
-.screen .cols { margin-top: clamp(1.4rem, 3.6vh, 2.6rem); }
+.screen .cols { margin-top: clamp(1.2rem, 3vh, 2.6rem); }
 .screen .sec-copy > :first-child { margin-top: 0; }
 .screen .sec-copy p { margin-top: 1em; }
 .screen .list { margin-top: 0.9em; gap: 0.45em; }
@@ -411,11 +442,22 @@ html.anim .reveal.in { opacity: 1; transform: none; }
 .closing .fine + .fine { margin-top: 0.5em; }
 
 @media (min-width: 901px) and (min-height: 620px) {
-  html { scroll-snap-type: y proximity; }
+  html { scroll-snap-type: y mandatory; }
+  .hero, .screen { scroll-snap-stop: always; }
   .screen { min-height: 100dvh; display: flex; align-items: center; scroll-snap-align: start; font-size: clamp(0.94rem, 2.1vh, 1.0625rem); }
-  .screen > .wrap { padding-top: 4.4rem; padding-bottom: 1.4rem; }
+  .screen > .wrap { padding-top: 4.4rem; padding-bottom: 0.9rem; }
   .screen .pair-imgs { max-width: calc(60vh + 0.9rem); }
+  /* Dungeon Heroes fits one screen: the carousel takes whatever height the copy and the four rules leave */
+  #dungeon-heroes { align-items: stretch; }
+  #dungeon-heroes > .wrap { display: flex; flex-direction: column; }
+  #dungeon-heroes .cols { flex: 1 1 auto; min-height: 0; align-items: center; }
+  #dungeon-heroes .cols > figure { align-self: stretch; position: relative; min-height: 17rem; margin: 0; }
+  #dungeon-heroes .deck { position: absolute; inset: 0; aspect-ratio: auto; }
+  .screen .principles { margin-top: clamp(1rem, 2.6vh, 1.8rem); gap: 0.8rem; }
+  .screen .principle { padding: 0.9em 1em 1em; }
+  .screen .principle p { margin-top: 0.45em; font-size: 0.88em; line-height: 1.5; }
   .screen .pairs { max-width: calc(58vh + 0.9rem); }
+  .screen .zig .shot-wide { max-width: calc(36vh * 16 / 9); justify-self: center; width: 100%; }
   .hero { padding-top: 4.6rem; padding-bottom: 1.6rem; }
   /* the v3.5 composition (phones overlapping, the game over the streak screen), scaled to the window height */
   .hero-shots { min-height: 0; height: min(100dvh - 7.5rem, 52vw, 700px); aspect-ratio: 0.82; max-width: 100%; justify-self: center; }
@@ -428,6 +470,142 @@ html.anim .reveal.in { opacity: 1; transform: none; }
   .closing img { margin: 0; }
   .screen .closing h2 { font-size: clamp(1.4rem, 6.6vw, 2.4rem); }
 }
+
+/* agents flow chart (pipeline with two rails) */
+.flowchart { background: var(--mech-bg); border: 1px solid var(--mech-line); border-radius: var(--r-media); box-shadow: var(--shadow); padding: 0.75rem 0.85rem 0.7rem; color: var(--ink); min-width: 0; }
+.flowchart > svg { display: block; width: 100%; height: auto; font-family: inherit; overflow: visible; }
+.flowchart .fc-key { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.2rem 1.3rem; margin: 0.45rem 0 0; padding: 0; list-style: none; font-family: var(--mono); font-size: 0.72rem; color: var(--muted); }
+.flowchart .fc-key li { display: inline-flex; align-items: center; gap: 0.45em; }
+.flowchart .fc-key i { width: 0.7em; height: 0.7em; border-radius: 3px; display: inline-block; }
+.flowchart .fc-key .k-me { background: var(--accent); box-shadow: 0 0 0 1px var(--accent-ink) inset; }
+.flowchart .fc-key .k-ai { background: var(--ai); }
+.flowchart .fc-key .k-game { background: var(--game); }
+.fc-box { fill: var(--mech-bg); stroke: var(--mech-line); stroke-width: 1.5; }
+.fc-t { fill: var(--ink); font-weight: 600; font-size: 16.5px; }
+.fc-s { fill: var(--muted); font-size: 13px; }
+.fc-ico { color: var(--muted); fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.fc-ai .fc-box { stroke: var(--ai); }
+.fc-ai .fc-ico { color: var(--ai); }
+.fc-me .fc-box { fill: var(--accent); stroke: var(--accent); }
+.fc-me .fc-t { fill: var(--on-accent); }
+.fc-me .fc-s { fill: var(--on-accent); opacity: 0.78; }
+.fc-me .fc-ico { color: var(--on-accent); }
+.fc-game .fc-box { stroke: var(--game); }
+.fc-game .fc-t, .fc-game .fc-ico { fill: var(--game); color: var(--game); }
+.fc-game .fc-ico { fill: none; }
+.fc-book .fc-box { stroke: var(--accent-ink); stroke-dasharray: 5 4; }
+.fc-book .fc-ico { color: var(--accent-ink); }
+.fc-edge { fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 6 6; }
+.fc-head { fill: var(--muted); }
+.fc-edge.ai { stroke: var(--ai); } .fc-head.ai { fill: var(--ai); }
+.fc-edge.learn { stroke: var(--accent-ink); } .fc-head.learn { fill: var(--accent-ink); }
+.fc-edge.game { stroke: var(--game); } .fc-head.game { fill: var(--game); }
+.fc-l { fill: var(--muted); font-size: 13px; }
+.fc-l.learn { fill: var(--accent-ink); font-weight: 500; }
+.fc-l.ai { fill: var(--ai); }
+.fc-l.game { fill: var(--game); }
+@media (max-width: 480px) { .flowchart.fc-a, .flowchart.fc-c { padding: 0.45rem 0.35rem; } }
+@media (prefers-reduced-motion: no-preference) {
+  .fc-edge { animation: fc-march 1.1s linear infinite; }
+  @keyframes fc-march { to { stroke-dashoffset: -12; } }
+}
+
+.fc-b { --nh: 3.5rem; --th: 5.6rem; font-size: 0.95rem; line-height: 1.25; }
+.fcb-grid { display: grid; grid-template-columns: 2.4rem minmax(0, 1fr) 8.6rem; column-gap: 0; align-items: stretch; }
+.fcb-grid > * { grid-column: 2; min-width: 0; }
+.fcb-ico { width: 1.35rem; height: 1.35rem; flex: none; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; color: var(--muted); }
+.fcb-node { display: flex; align-items: center; gap: 0.7rem; min-height: var(--nh); padding: 0.3rem 0.9rem; border: 1.5px solid var(--mech-line); border-radius: 12px; background: var(--mech-bg); position: relative; z-index: 1; }
+.fcb-node b { display: block; font-weight: 600; font-size: 1.02em; }
+.fcb-node span { display: block; color: var(--muted); font-size: 0.8em; margin-top: 0.1em; }
+.fcb-node.ai { border-color: var(--ai); } .fcb-node.ai .fcb-ico { color: var(--ai); }
+.fcb-node.me { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.fcb-node.me span, .fcb-node.me .fcb-ico { color: var(--on-accent); opacity: 0.8; }
+.fcb-node.game { border-color: var(--game); } .fcb-node.game b, .fcb-node.game .fcb-ico { color: var(--game); }
+.fcb-team { min-height: var(--th); border: 1.5px solid var(--ai); border-radius: 12px; padding: 0.45rem 0.6rem 0.5rem; display: flex; flex-direction: column; justify-content: center; gap: 0.4rem; position: relative; z-index: 1; background: var(--mech-bg); }
+.fcb-team p { margin: 0; font-size: 0.78em; white-space: nowrap; color: var(--muted); text-align: center; }
+.fcb-team p b { color: var(--ink); font-size: 1.27em; font-weight: 600; margin-right: 0.35em; }
+.fcb-team ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.4rem; }
+.fcb-team li { display: flex; align-items: center; justify-content: center; gap: 0.35rem; padding: 0.3rem 0.2rem; border-radius: 8px; background: var(--mech-soft); border: 1px solid var(--mech-line); font-size: 0.8em; }
+.fcb-team li .fcb-ico { color: var(--ai); width: 1.1rem; height: 1.1rem; }
+.fcb-arrow { height: 1.65rem; position: relative; display: flex; justify-content: center; color: var(--muted); }
+.fcb-arrow i { width: 2px; height: calc(100% - 7px); background: repeating-linear-gradient(to bottom, currentColor 0 5px, transparent 5px 10px); }
+.fcb-arrow::after { content: ""; position: absolute; bottom: 1px; left: 50%; transform: translateX(-50%); border: 5.5px solid transparent; border-top: 8px solid currentColor; border-bottom: 0; }
+.fcb-arrow.ai { color: var(--ai); } .fcb-arrow.game { color: var(--game); }
+.fcb-arrow em { position: absolute; left: calc(50% + 0.8rem); top: 0; font-style: normal; font-size: 0.78em; }
+.fcb-grid > .fcb-rail { position: relative; }
+.fcb-rail.left { grid-column: 1; margin: calc(var(--nh) / 2) 0; border: 2px dashed var(--ai); border-right: 0; border-radius: 14px 0 0 14px; margin-left: 0.9rem; margin-right: 0; }
+.fcb-rail.left::after { content: ""; position: absolute; right: -1px; top: -7.5px; border: 6.5px solid transparent; border-left: 9px solid var(--ai); border-right: 0; }
+.fcb-rail.left span { position: absolute; left: -0.75rem; top: 50%; transform: translate(-50%, -50%) rotate(-90deg); font-size: 0.78em; color: var(--ai); white-space: nowrap; background: var(--mech-bg); padding: 0 0.4em; }
+.fcb-rail.right { grid-column: 3; margin: calc(var(--th) / 2) 0 calc(var(--nh) / 2); border: 2px dashed var(--accent-ink); border-left: 0; border-radius: 0 14px 14px 0; margin-right: 3.6rem; display: flex; flex-direction: column; justify-content: center; }
+.fcb-rail.right::after { content: ""; position: absolute; left: 0; top: -7.5px; border: 6.5px solid transparent; border-right: 9px solid var(--accent-ink); border-left: 0; }
+.fcb-rail.right > * { position: relative; left: 1.5rem; width: 7rem; }
+.fcb-book { border: 1.5px dashed var(--accent-ink); border-radius: 12px; background: var(--mech-bg); padding: 0.55rem 0.4rem; text-align: center; margin: 0.5rem 0; }
+.fcb-rail.right > .fcb-write { position: absolute; left: 0; width: auto; right: 12px; top: 12px; bottom: 50%; border: 2px dashed var(--accent-ink); border-left: 0; border-bottom: 0; border-radius: 0 9px 0 0; }
+.fc-b { --bx: 3.5rem; background: none; border: 0; box-shadow: none; padding: 0; }
+.fc-b .fcb-rail.left span, .fc-b .fcb-rail small { background: var(--bg-band); }
+.fcb-book::before, .fcb-book::after { content: ""; position: absolute; transform: translateX(-50%); border: 6.5px solid transparent; }
+.fcb-book::before { left: calc(var(--bx) - 16.5px); bottom: 100%; border-top: 9px solid var(--accent-ink); border-bottom: 0; }
+.fcb-book::after { left: calc(var(--bx) - 2.5px); top: 100%; border-bottom: 9px solid var(--accent-ink); border-top: 0; }
+.fcb-book .fcb-ico { color: var(--accent-ink); display: block; margin: 0 auto 0.2rem; }
+.fcb-book b { display: block; font-weight: 600; } .fcb-book span { display: block; color: var(--muted); font-size: 0.8em; }
+.fcb-rail small { display: block; color: var(--accent-ink); font-size: 0.78em; font-weight: 500; text-align: center; background: var(--mech-bg); padding: 0.2em 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .fcb-arrow i { animation: fcb-fall 0.9s linear infinite; }
+  @keyframes fcb-fall { to { background-position: 0 10px; } }
+}
+@media (max-width: 480px) {
+  .fc-b { font-size: 0.82rem; }
+  .fcb-grid { grid-template-columns: 1.7rem minmax(0, 1fr) 6.1rem; }
+  .fcb-node { padding: 0.3rem 0.55rem; gap: 0.45rem; }
+  .fcb-team ul { grid-template-columns: repeat(2, 1fr); }
+  .fcb-team p { white-space: normal; }
+  .fcb-team p b { display: block; margin: 0; }
+  .fc-b { --th: 8.6rem; --bx: 2.3rem; }
+  .fcb-rail.left { margin-left: 0.6rem; }
+  .fcb-rail.right { margin-right: 3.1rem; }
+  .fcb-rail.right > * { left: 0.7rem; width: 5.2rem; }
+}
+
+/* variant 1 · two phones, cut open: the path of a step drawn through each */
+.s1-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem 1rem; }
+.s1-grid h4 { font: inherit; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.72rem; text-align: center; }
+.s1-grid svg { display: block; width: 100%; height: auto; max-width: 240px; margin: 0 auto; }
+.s1-cap { list-style: none; display: grid; gap: 0.1rem; justify-content: center; font-size: 0.78rem; line-height: 1.5; }
+.s1-cap li { display: flex; gap: 0.45em; align-items: center; }
+.s1-cap svg { width: 0.95em; height: 0.95em; flex: none; margin: 0; }
+.s1 text { font-family: var(--mono); font-size: 12px; fill: var(--ink); }
+.s1 .tm { fill: var(--muted); font-size: 11px; }
+.s1 .ph { fill: var(--mech-soft); stroke: var(--muted); stroke-width: 2; }
+.s1 .win { fill: var(--mech-bg); stroke: var(--line); stroke-width: 1.5; }
+.s1 .chip { fill: var(--mech-bg); stroke: var(--ink); stroke-width: 1.5; }
+.s1 .pin { stroke: var(--ink); stroke-width: 1.5; }
+.s1 .wire { stroke: var(--muted); stroke-width: 1.5; fill: none; stroke-dasharray: 1 5; stroke-linecap: round; }
+.s1 .wire.ok { stroke: var(--ok); }
+.s1 .wire.cut { stroke: var(--warn); stroke-dasharray: 3 5; }
+.s1 .w { fill: var(--warn); } .s1 .o { fill: var(--ok); } .s1 .a { fill: var(--ai); }
+.s1 .sw { stroke: var(--warn); fill: var(--mech-bg); stroke-width: 1.5; }
+.s1 .so { stroke: var(--ok); fill: none; stroke-width: 1.5; }
+.s1 .sa { stroke: var(--ai); fill: var(--mech-bg); stroke-width: 1.8; }
+.s1 .fp { fill: var(--ink); }
+.s1 .fp.o { fill: var(--ok); }
+@media (max-width: 480px) {
+  .s1 text { font-size: 13.5px; } .s1 .tm { font-size: 13px; }
+  .s1-cap { font-size: 0.74rem; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .s1 .walk use { animation: s1-step 4.2s linear infinite backwards; }
+  .s1 .walk use:nth-child(2) { animation-delay: 0.3s; } .s1 .walk use:nth-child(3) { animation-delay: 0.6s; }
+  .s1 .walk use:nth-child(4) { animation-delay: 0.9s; } .s1 .walk use:nth-child(5) { animation-delay: 1.2s; }
+  .s1 .walk use:nth-child(6) { animation-delay: 1.5s; } .s1 .walk use:nth-child(7) { animation-delay: 1.8s; }
+  .s1 .walk use:nth-child(8) { animation-delay: 2.1s; }
+  .s1 .x { animation: s1-x 4.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+}
+@keyframes s1-step { 0% { opacity: 0; } 6% { opacity: 1; } 90% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes s1-x { 0%, 20%, 60%, 100% { transform: scale(1); } 30% { transform: scale(1.25); } }
+
+/* agents: keyword groups */
+#agents .kw-h { margin-top: 1em; font-family: var(--mono); font-size: 0.76em; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ai); }
+#agents .kw-h + .list { margin-top: 0.35em; }
 </style>
 </head>
 <body>
@@ -443,9 +621,11 @@ html.anim .reveal.in { opacity: 1; transform: none; }
 
 <section class="hero">
 <div class="hero-copy">
-<div class="byline"><img src="media/dani-720.jpg" width="720" height="720" alt="Dani Caballero Mélich"><span><b>Dani Caballero Mélich</b><br>Gameplay programmer · Barcelona</span></div>
+<div class="byline"><img src="media/dani-720.jpg" width="720" height="720" alt="Dani Caballero Mélich"><span><b>Dani Caballero Mélich</b><br>AI Engineer · Gameplay programmer · Barcelona</span></div>
 <h1>I build <span class="w-game">games</span>. And the <span class="w-ai">AI team</span> that ships them.</h1>
-<p class="sub">I'm a gameplay programmer in Barcelona. I've worked at two game studios, and one of those games, Stepland, is live on both app stores. Now I'm making my own mobile game, Dungeon Heroes. To keep up with it I set up a team of AI agents: AI models that each do one job, like programming or building menus. Every hour the team takes on the next tasks, and it brings the big decisions to me.</p>
+<p class="sub"><b>I'm a gameplay programmer in Barcelona.</b> I've shipped games at two studios and built AI systems in production.</p>
+<p class="sub">My own game, Dungeon Heroes, is <b>a real-time roguelike deckbuilder for mobile</b>, designed around a free-to-play model.</p>
+<p class="sub">To build it, I set up <b>a studio made of AI agents</b>: a fleet of specialists, a manager that assigns their work, and a loop that turns my corrections into their rules.</p>
 <div class="cta">
 <a class="btn btn-ai" href="#agents">The AI team</a>
 <a class="btn btn-game" href="#dungeon-heroes">Dungeon Heroes</a>
@@ -453,139 +633,217 @@ html.anim .reveal.in { opacity: 1; transform: none; }
 </div>
 <div class="hero-shots">
 <img class="phone phone-a" src="media/screenshot_streak.jpeg" width="720" height="1600" alt="Stepland's streak screen, live on both stores">
-<img class="phone phone-b" src="media/combat-screen-dev-capture-2026-07-17.png" width="348" height="700" alt="Dungeon Heroes combat: four cycling cards, an energy meter, an enemy winding up">
+<img class="phone phone-b" src="media/dh/candidates/run-end-death-a.jpg" width="540" height="1080" alt="Dungeon Heroes combat: the Knight and a charging beast, a four-card hand and an energy meter">
 </div>
 </section>
 
-<section id="agents" class="screen reveal">
+<section id="agents" class="screen band reveal">
 <div class="wrap">
-<p class="kicker">The AI team · built for Dungeon Heroes · since August 2026</p>
-<h2>An <span class="w-ai">AI team</span> works on my game every hour. I make the big decisions.</h2>
+<p class="kicker">Multi-agent system · orchestration · MCP · RAG · evals · 2026</p>
+<h2>A <span class="w-ai">multi-agent studio</span> builds my game. I set the direction and judge the work.</h2>
 <div class="cols split">
 <div class="sec-copy">
-<p>Dungeon Heroes is a lot of game for one person, so I set up a team of AI agents. Each agent is an AI model (Anthropic's Claude) with one written job, like programming, building menus or game design. A manager agent runs the team.</p>
-<p>Every hour the manager picks the next tasks, hands them out, and checks every change that comes back before it goes into the game. When a decision comes up, the manager sorts it by what a mistake would cost:</p>
+<p>Dungeon Heroes is a big project for one person, so <b>I built the studio it needed out of AI agents</b>.</p>
+<p class="kw-h">Orchestration</p>
 <ul class="list">
-<li><b>Something it can check itself</b> · like whether a change broke the game. The manager handles it, and tells me afterwards.</li>
-<li><b>A matter of taste</b> · how something should look or feel. The manager writes up the options and the one it would pick, and I choose.</li>
-<li><b>Something expensive to get wrong</b> · prices, the store page, save files. The manager never decides those; they wait for me.</li>
+<li><b>Multi-agent orchestration</b> · a manager agent plans the work and dispatches specialist sub-agents in parallel, each in its own git worktree.</li>
+<li><b>Tool use over MCP</b> · MCP servers put the agents inside the live Unity editor and a pixel-art generator.</li>
 </ul>
-<div class="cta">
-<a class="btn btn-solid" href="agents.html">How the AI team works</a>
+<p class="kw-h">Knowledge</p>
+<ul class="list">
+<li><b>Context engineering</b> · a handbook per craft, read before every task. Each correction I give becomes a rule in it.</li>
+<li><b>RAG, hybrid retrieval</b> · the agents search their own past work before starting a task, with keyword and vector search combined. Retrieval quality is scored against a gold set of known answers.</li>
+</ul>
+<p class="kw-h">Control</p>
+<ul class="list">
+<li><b>Human gates</b> · I step in only where I add a decision: direction, sketch choice, verdict. Every other stop is automated.</li>
+<li><b>Evals and guardrails</b> · a reviewer agent judges and scores every feature against its initial specs. Nothing merges before it compiles and passes tests and CI.</li>
+</ul>
 </div>
+<div class="flowchart fc-b">
+<div class="fcb-grid" role="img" aria-label="How the AI studio works, as a pipeline: I set direction; a manager agent picks tasks and hands them to several specialist agents at once; the manager builds, tests and merges every result and refills the free place; evidence is captured from the running game; I give the verdict, and an accepted feature ships in the game. The specialist sub-agents, each in its own worktree, read the handbooks before a task and update them after it, and every correction I give becomes a rule in them.">
+<div class="fcb-node me" style="grid-row:1"><svg class="fcb-ico" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="6.2" r="3.4"/><path d="M3.2 17.6c0-3.9 3-6.6 6.8-6.6s6.8 2.7 6.8 6.6"/></svg><div><b>I set direction</b><span>features, and what done means</span></div></div>
+<div class="fcb-arrow " style="grid-row:2"><i></i></div>
+<div class="fcb-node ai" style="grid-row:3"><svg class="fcb-ico" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="4.2" r="2.2"/><circle cx="3.8" cy="15.8" r="1.9"/><circle cx="10" cy="15.8" r="1.9"/><circle cx="16.2" cy="15.8" r="1.9"/><path d="M10 6.4v7.5M10 9.8H3.8v4.1M10 9.8h6.2v4.1"/></svg><div><b>Manager</b><span>picks tasks, hands them out</span></div></div>
+<div class="fcb-arrow ai" style="grid-row:4"><i></i></div>
+<div class="fcb-team" style="grid-row:5"><p><b>Specialist sub-agents</b> · a worktree each</p><ul><li><svg class="fcb-ico" viewBox="0 0 20 20" aria-hidden="true"><rect x="3.5" y="7" width="13" height="9.5" rx="2.4"/><path d="M10 7V4.2"/><circle cx="10" cy="3.2" r="1.1"/><circle cx="7.6" cy="11.4" r="1" fill="currentColor"/><circle cx="12.4" cy="11.4" r="1" fill="currentColor"/></svg><span>Code</span></li><li><svg class="fcb-ico" viewBox="0 0 20 20" aria-hidden="true"><rect x="3.5" y="7" width="13" height="9.5" rx="2.4"/><path d="M10 7V4.2"/><circle cx="10" cy="3.2" r="1.1"/><circle cx="7.6" cy="11.4" r="1" fill="currentColor"/><circle cx="12.4" cy="11.4" r="1" fill="currentColor"/></svg><span>UI</span></li><li><svg class="fcb-ico" viewBox="0 0 20 20" aria-hidden="true"><rect x="3.5" y="7" width="13" height="9.5" rx="2.4"/><path d="M10 7V4.2"/><circle cx="10" cy="3.2" r="1.1"/><circle cx="7.6" cy="11.4" r="1" fill="currentColor"/><circle cx="12.4" cy="11.4" r="1" fill="currentColor"/></svg><span>Design</span></li><li><svg class="fcb-ico" viewBox="0 0 20 20" aria-hidden="true"><rect x="3.5" y="7" width="13" height="9.5" rx="2.4"/><path d="M10 7V4.2"/><circle cx="10" cy="3.2" r="1.1"/><circle cx="7.6" cy="11.4" r="1" fill="currentColor"/><circle cx="12.4" cy="11.4" r="1" fill="currentColor"/></svg><span>Art</span></li></ul></div>
+<div class="fcb-arrow ai" style="grid-row:6"><i></i></div>
+<div class="fcb-node ai" style="grid-row:7"><svg class="fcb-ico" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.3"/><path d="M6.4 10.3l2.5 2.5 4.8-5.2"/></svg><div><b>Build · Test · Merge</b><span>the manager checks every result</span></div></div>
+<div class="fcb-arrow ai" style="grid-row:8"><i></i></div>
+<div class="fcb-node " style="grid-row:9"><svg class="fcb-ico" viewBox="0 0 20 20" aria-hidden="true"><rect x="2.2" y="6" width="15.6" height="10.6" rx="2.2"/><path d="M7 6l1.2-2.2h3.6L13 6"/><circle cx="10" cy="11.3" r="2.9"/></svg><div><b>Evidence</b><span>captured from the running game</span></div></div>
+<div class="fcb-arrow " style="grid-row:10"><i></i></div>
+<div class="fcb-node me" style="grid-row:11"><svg class="fcb-ico" viewBox="0 0 20 20" aria-hidden="true"><path d="M1.8 10c2-3.6 4.9-5.4 8.2-5.4s6.2 1.8 8.2 5.4c-2 3.6-4.9 5.4-8.2 5.4S3.8 13.6 1.8 10z"/><circle cx="10" cy="10" r="2.6"/></svg><div><b>I give the verdict</b><span>accept, or send back</span></div></div>
+<div class="fcb-arrow game" style="grid-row:12"><i></i><em>accept</em></div>
+<div class="fcb-node game" style="grid-row:13"><svg class="fcb-ico" viewBox="0 0 20 20" aria-hidden="true"><rect x="1.8" y="6" width="16.4" height="9.4" rx="4.7"/><path d="M6.2 9v3.4M4.5 10.7h3.4"/><circle cx="13" cy="9.7" r=".9" fill="currentColor"/><circle cx="15" cy="11.7" r=".9" fill="currentColor"/></svg><div><b>The game</b><span>the feature ships</span></div></div>
+<div class="fcb-rail left" style="grid-row:3 / 8"><span>refills the free place</span></div>
+<div class="fcb-rail right" style="grid-row:5 / 12"><i class="fcb-write" aria-hidden="true"></i><small class="fcb-up">read before,<br>updated after</small><div class="fcb-book"><svg class="fcb-ico" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 5.4C8.4 4 5.8 3.6 2.8 4v11.6c3-.4 5.6 0 7.2 1.4 1.6-1.4 4.2-1.8 7.2-1.4V4c-3-.4-5.6 0-7.2 1.4z"/><path d="M10 5.4V17"/></svg><b>Handbooks</b><span>one per craft</span></div><small class="fcb-dn">every correction<br>becomes a rule</small></div>
 </div>
-<div class="mech term" data-run data-start="14:02" data-end="14:57" aria-label="One hour of the AI team, as a log">
-<div class="mech-bar"><span>a typical hour of the AI team</span><b class="clock">14:02</b></div>
-<ol>
-<li><span class="t">14:02</span><span class="who">manager</span>starts the hour · checks the game still runs</li>
-<li><span class="t">14:03</span><span class="who">manager</span>picks up the two answers Dani left</li>
-<li><span class="t">14:05</span><span class="who">manager</span>hands out four tasks, one per agent</li>
-<li><span class="t">14:31</span><span class="who">programmer</span>done · manager tests it, adds it to the game</li>
-<li><span class="t">14:38</span><span class="who">designer</span>a taste question · three options for Dani</li>
-<li><span class="t">14:52</span><span class="who">menu builder</span>unsure of its work · held back for Dani</li>
-<li class="sum"><span class="t">14:57</span>hour done · 2 new things waiting for Dani</li>
-</ol>
+<ul class="fc-key" aria-hidden="true"><li><i class="k-me"></i>me</li><li><i class="k-ai"></i>the agents</li><li><i class="k-game"></i>the game</li></ul>
 </div>
 </div>
 </div>
 </section>
 
-<section id="dungeon-heroes" class="screen band reveal">
+<section id="dungeon-heroes" class="screen reveal">
 <div class="wrap">
-<p class="kicker">Dungeon Heroes · my own game · 2025 to now · Unity · Android</p>
-<h2><span class="h2-tail"><span class="w-game">Dungeon Heroes</span>: a mobile action game</span> <span class="h2-tail">where you fight through a dungeon</span> <span class="h2-tail">with spell cards.</span></h2>
+<p class="kicker">Dungeon Heroes · my roguelike deckbuilder · Unity · 2026</p>
+<h2><span class="w-game">Dungeon Heroes</span>: real-time card combat, and the free-to-play systems around it.</h2>
 <div class="cols split flip">
 <figure>
-<div class="pair-imgs">
-<video class="loop" autoplay muted loop playsinline preload="metadata" poster="media/02-combat.jpg" aria-label="Dungeon Heroes combat on floor six, hits landing">
-<source src="media/02-combat.webm" type="video/webm">
-<source src="media/02-combat.mp4" type="video/mp4">
-</video>
-<video class="loop" autoplay muted loop playsinline preload="metadata" poster="media/04-parry.jpg" aria-label="A parry landing in Dungeon Heroes">
-<source src="media/04-parry.webm" type="video/webm">
-<source src="media/04-parry.mp4" type="video/mp4">
-</video>
+<div class="deck" data-interval="3000">
+<video muted loop playsinline preload="metadata" poster="media/dh/parry-punish.jpg" aria-label="A parry negates an enemy attack"><source src="media/dh/parry-punish.mp4" type="video/mp4"></video>
+<video muted loop playsinline preload="none" poster="media/dh/candidates-clips/reward-to-next-fight.jpg" aria-label="A fight is won, a card is picked, and the next fight starts"><source src="media/dh/candidates-clips/reward-to-next-fight.mp4" type="video/mp4"></video>
+<video muted loop playsinline preload="none" poster="media/dh/boss-telegraph.jpg" aria-label="A boss shows its attack before it lands"><source src="media/dh/boss-telegraph.mp4" type="video/mp4"></video>
+<video muted loop playsinline preload="none" poster="media/dh/candidates-clips/fight-reward-shop-brutality.jpg" aria-label="A short fight, its rewards, and the road to the merchant"><source src="media/dh/candidates-clips/fight-reward-shop-brutality.mp4" type="video/mp4"></video>
+<video muted loop playsinline preload="none" poster="media/dh/deck-loadout.jpg" aria-label="The card library and deck loadout"><source src="media/dh/deck-loadout.mp4" type="video/mp4"></video>
 </div>
 </figure>
 <div class="sec-copy">
-<p>You fight your way down a dungeon in real time, one floor after another. When your hero falls you start again from the top and build the hero differently; games like this are called roguelikes.</p>
-<p>Your spells are cards, four in your hand at a time. While you cast one you can't defend yourself, so a big spell hits hard but leaves you open to the enemy's next attack.</p>
-<p>The Knight, one of four heroes, defends with a parry: every enemy shows when it's about to attack, and if you tap at the right moment you block the hit and gain energy, which is what spells cost.</p>
-<p>There are 174 spells, 52 status effects (lasting conditions such as bleeding) and 38 relics, rare items that change the rules, so no two attempts play out the same.</p>
-<p>The design, the code and the art were mine alone until the AI team joined in August 2026. It stands at signed Android release builds, store-ready.</p>
-<div class="cta">
-<a class="btn btn-solid" href="dungeon-heroes.html">More about Dungeon Heroes</a>
+<p><b>A roguelike deckbuilder played in real time</b>: a four-card hand that cycles like Clash Royale's, energy that fills as you fight, and casts that leave you vulnerable for a moment.</p>
+<p>Enemies show their attacks before they land, so each moment asks whether to go on the offensive or defend. Each game feels different, with <b>197 spells and 54 relics</b> to choose from.</p>
+<p>It is <b>in closed testing on Google Play</b>, where testers have been playing it and giving feedback daily for weeks. A free-to-play game lives or dies on what systems surround the runs, so I designed that part as carefully as the combat. Four rules hold it together:</p>
 </div>
 </div>
+<div class="principles">
+<div class="principle"><b>Progression</b><p>Cards, relics and heroes are collected and upgraded between runs. Ascensions give players a motive to upgrade their heroes. Time-gated content ensures the game remains exciting and novel for months.</p></div>
+<div class="principle"><b>Monetization</b><p>All players have access to all content. Doubling run rewards or reviving once per run sit behind rewarded ads. Players can pay to unlock new characters and speed up progression, obtaining higher-level gear faster.</p></div>
+<div class="principle"><b>Retention</b><p>Daily and weekly tasks give players a reason to come back every day. An account track, a mastery track per hero and a long difficulty ladder give players long-term goals to work toward.</p></div>
+<div class="principle"><b>Telemetry</b><p>Run outcomes, card choices and more data points get recorded with each run. This data enables informed balance decisions based on player actions and statistics. It also measures pain points and retention drops, which point at the weak link in the game's design, reinforcing the framework.</p></div>
 </div>
 </div>
 </section>
 
-<section id="stepland" class="screen reveal">
+<section id="stepland" class="screen band reveal">
 <div class="wrap">
-<p class="kicker">Stepland · Somni Game Studios · Godot · 2025 to 2026</p>
-<h2><span class="w-game">Stepland</span>: a pet that grows when you walk.</h2>
+<p class="kicker">Stepland · Somni Game Studios · Godot · Kotlin · 2025 · live on PlayStore and AppStore</p>
+<h2>The step sensor was <span class="w-game">Stepland</span>'s number one blocker. I learned Kotlin to fix it at the source.</h2>
 <div class="cols split">
 <div class="sec-copy">
-<p>Stepland turns healthy habits into a game. The steps you walk, the water you drink, your meditation and exercise all feed a Tamagotchi-like pet. It's free to play, and live on Google Play and the App Store.</p>
-<p>I was one of its three main programmers. Three things I built:</p>
+<p>Stepland is a free mobile game where the steps you walk grow a pet. On Android, its step counting depended on a second app that players had to install and set up first, and when that setup went wrong <b>it failed silently</b>: the game said it was connected and counted zero steps. <b>It was costing us players in their first minutes.</b></p>
+<p>I proposed reading the phone's own step sensor instead, and <b>built the plug-in in Kotlin, Android's language, in a week</b>. There is nothing extra to install, and it has been stable since. This was <b>the last bottleneck holding the game back</b> from entering production.</p>
+<p>Other important contributions I made:</p>
 <ul class="list">
-<li><b>Step counting</b> · on Android, players first had to install and set up a second app before their steps counted. I replaced that with a plug-in that reads the phone's own step counter, so there's nothing extra to install. I wrote it in Kotlin, Android's language, in a week, and it has been stable since.</li>
-<li><b>The tutorial</b> · 82 steps stored as data rather than written into the code, so the team can change it easily, and if you close the app halfway it picks up where you left off.</li>
-<li><b>Screen layouts</b> · I built each screen first as a rough version without final art, so the team could agree on changes while they were still cheap to make. One is shown here, next to the finished screen.</li>
+<li><b>The tutorial, as data</b> · I designed it and drove its build with AI coding agents: 82 steps stored as data and not written into the code, so the team changes it without a programmer, and a player who closes the app halfway picks up where they left off.</li>
+<li><b>Streaks</b> · the daily streak system end to end, from the saved data to the screen players see, still live as I built it.</li>
 </ul>
 <div class="cta">
 <a class="btn btn-line" href="https://play.google.com/store/apps/details?id=com.somnigamestudios.stepland">Stepland on Google Play</a>
 </div>
 </div>
-<figure class="pairs">
-<img src="media/stepland-level-selection.png" width="512" height="850" alt="Dani's structural blockout of Stepland's level-select screen" loading="lazy" decoding="async">
-<img src="media/screenshot_memory.jpeg" width="720" height="1600" alt="The same screen in the live game, dressed with final art" loading="lazy" decoding="async">
-<figcaption>My rough layout on the left, the finished screen on the right.</figcaption>
-</figure>
+<div class="mech-stack">
+<div class="mech s1" aria-label="Step counting, before and after">
+<div class="mech-bar"><span>step counting on Android</span><b class="g">before &rarr; after</b></div>
+<div class="mech-body">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="fp" viewBox="0 0 12 20"><path d="M6 0C10 0 12 3.5 11.5 7.5C11 11 9 12.6 6 12.6C3 12.6 1 11 .5 7.5C0 3.5 2 0 6 0Z"/><ellipse cx="6" cy="16.6" rx="3.5" ry="3.2"/></symbol>
+<symbol id="ck" viewBox="0 0 16 16"><path d="M2.5 8.5l3.5 3.5 7.5-8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="xx" viewBox="0 0 16 16"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+</defs></svg>
+<div class="s1-grid">
+<h4 class="warn">before</h4>
+<h4 class="ok">after</h4>
+<svg viewBox="0 0 240 350" role="img" aria-label="Before: inside the phone, steps leave the step sensor, reach a second app, and the link to Stepland is broken. Stepland says connected and shows zero steps.">
+<rect class="ph" x="32" y="4" width="176" height="342" rx="24"/>
+<rect x="100" y="13" width="40" height="5" rx="2.5" fill="var(--muted)" opacity=".5"/>
+<rect class="win" x="46" y="28" width="148" height="108" rx="10"/>
+<text class="tm" x="58" y="47">Stepland</text>
+<rect class="so" x="57" y="55" width="108" height="23" rx="11.5"/>
+<use href="#ck" x="64" y="60" width="13" height="13" style="color:var(--ok)"/>
+<text class="o" x="82" y="71">connected</text>
+<text class="w" x="57" y="124" style="font-size:42px;font-weight:700">0</text>
+<text class="w" x="88" y="124" style="font-size:14px">steps</text>
+<path class="wire cut" d="M120 136V184"/>
+<g class="x"><circle class="sw" cx="120" cy="160" r="11"/><use href="#xx" x="113" y="153" width="14" height="14" style="color:var(--warn)"/></g>
+<rect class="sw" x="58" y="184" width="124" height="52" rx="12" stroke-dasharray="5 4"/>
+<text x="120" y="206" text-anchor="middle">a second app</text>
+<text class="w" x="120" y="224" text-anchor="middle" style="font-size:11px">set up wrong</text>
+<path class="wire" d="M120 236V290"/>
+<g class="walk"><use class="fp" href="#fp" x="125" y="272" width="10.2" height="17"/><use class="fp" href="#fp" x="104.8" y="255" width="10.2" height="17"/><use class="fp" href="#fp" x="125" y="238" width="10.2" height="17"/></g>
+<rect class="chip" x="100" y="290" width="40" height="26" rx="5"/>
+<path class="pin" d="M94 297h6M94 303h6M94 309h6M140 297h6M140 303h6M140 309h6"/>
+<use class="fp" href="#fp" x="115.5" y="295" width="9" height="15"/>
+<text class="tm" x="120" y="334" text-anchor="middle">step sensor</text>
+</svg>
+<svg viewBox="0 0 240 350" role="img" aria-label="After: inside the phone, steps go straight from the step sensor into my Kotlin plug-in, which is part of Stepland. Steps are counted.">
+<rect class="ph" x="32" y="4" width="176" height="342" rx="24"/>
+<rect x="100" y="13" width="40" height="5" rx="2.5" fill="var(--muted)" opacity=".5"/>
+<rect class="win" x="46" y="28" width="148" height="108" rx="10"/>
+<text class="tm" x="58" y="47">Stepland</text>
+<g class="fp o"><use href="#fp" x="58" y="62" width="12" height="20"/><use href="#fp" x="78" y="54" width="12" height="20"/><use href="#fp" x="98" y="62" width="12" height="20"/><use href="#fp" x="118" y="54" width="12" height="20"/><use href="#fp" x="138" y="62" width="12" height="20"/><use href="#fp" x="158" y="54" width="12" height="20"/></g>
+<use href="#ck" x="57" y="92" width="14" height="14" style="color:var(--ok)"/>
+<text class="o" x="76" y="104" style="font-size:13px">steps counted</text>
+<rect class="sa" x="46" y="120" width="148" height="34" rx="9"/>
+<text class="a" x="120" y="141.5" text-anchor="middle" style="font-size:12px">my Kotlin plug-in</text>
+<path class="wire ok" d="M120 154V290"/>
+<g class="walk"><use class="fp o" href="#fp" x="125" y="272" width="10.2" height="17"/><use class="fp o" href="#fp" x="104.8" y="255" width="10.2" height="17"/><use class="fp o" href="#fp" x="125" y="238" width="10.2" height="17"/><use class="fp o" href="#fp" x="104.8" y="221" width="10.2" height="17"/><use class="fp o" href="#fp" x="125" y="204" width="10.2" height="17"/><use class="fp o" href="#fp" x="104.8" y="187" width="10.2" height="17"/><use class="fp o" href="#fp" x="125" y="170" width="10.2" height="17"/></g>
+<rect class="chip" x="100" y="290" width="40" height="26" rx="5"/>
+<path class="pin" d="M94 297h6M94 303h6M94 309h6M140 297h6M140 303h6M140 309h6"/>
+<use class="fp" href="#fp" x="115.5" y="295" width="9" height="15"/>
+<text class="tm" x="120" y="334" text-anchor="middle">step sensor</text>
+</svg>
+<ul class="s1-cap warn"><li><svg viewBox="0 0 16 16"><use href="#xx"/></svg>"connected", zero steps</li></ul>
+<ul class="s1-cap ok"><li><svg viewBox="0 0 16 16"><use href="#ck"/></svg>nothing to install</li><li><svg viewBox="0 0 16 16"><use href="#ck"/></svg>built in a week</li><li><svg viewBox="0 0 16 16"><use href="#ck"/></svg>stable since</li></ul>
+</div>
+</div>
+</div>
+<div class="mech" aria-label="The tutorial: 82 steps stored as data, with resume">
+<div class="mech-bar"><span>the tutorial · 82 steps, stored as data</span><b>resumes here</b></div>
+<div class="mech-body">
+<div class="steps" id="tut-steps"></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </section>
 
-<section id="degen-crawler" class="screen band reveal">
+<section id="degen-crawler" class="screen reveal">
 <div class="wrap">
-<p class="kicker">Degen Crawler · Purple Pwny · Unity · 2023 to 2024 · a three-person remote studio</p>
-<h2><span class="w-game">Degen Crawler</span>: I built an AI player that plays thousands of dungeons to check that no item is too strong.</h2>
-<div class="cols split flip">
-<div class="mech" aria-label="The balance agent, step by step">
+<p class="kicker">Degen Crawler · Purple Pwny Studios · Gameplay programmer · Unity · 2023</p>
+<h2>I built an <span class="w-ai">AI system</span> that simulates thousands of <span class="w-game">Degen Crawler</span> runs to help balance a live game.</h2>
+<div class="cols zig">
+<div class="sec-copy">
+<p>In Degen Crawler players stake money on each run, so <b>item balance decided whether the studio made or lost money</b> on each run. Nobody can play thousands of dungeons by hand to check an item.</p>
+<p>So <b>I built an AI player</b>: a program that plays the game the way a strong human would. It's a classic kind of AI called an expert system. Its strategy is written by hand, rule by rule, from how I play the game myself, so <b>every move it makes can be read and explained</b>.</p>
+</div>
+<figure class="shot-wide"><img src="media/degen/degen-crawler.jpg" width="1024" height="576" alt="Degen Crawler: a fight during a run" loading="lazy" decoding="async"></figure>
+<div class="mech" aria-label="One item test: an item goes in, thousands of runs are played, a report comes out">
 <div class="mech-bar"><span>one item test</span><b class="g">an expert system</b></div>
 <div class="mech-body">
-<dl class="kv">
-<dt>input</dt><dd>an item's new stats</dd>
-<dt>the player</dt><dd>the AI: it scores every possible move with rules I wrote, and takes the best one</dd>
-<dt>it plays</dt><dd>thousands of dungeons per test</dd>
-<dt>output</dt><dd>how the item did, and the reason behind every move</dd>
+<div class="flow">
+<span class="stage hot">new item</span><span class="arrow">&rarr;</span>
+<span class="stage res">thousands of runs</span><span class="arrow">&rarr;</span>
+<span class="stage">report</span>
+</div>
+<dl class="kv" style="margin-top:0.9rem">
+<dt>every move</dt><dd>all options scored by rules I wrote; the best one is played</dd>
+<dt>the report</dt><dd>how the item did, and the reason behind every move</dd>
 </dl>
 </div>
 </div>
 <div class="sec-copy">
-<p>Degen Crawler is a dungeon game where players stake real money on each attempt, and win or lose it depending on how well they play. That makes the strength of every item a money question: if an item is too strong, the studio pays out more than it takes in, and nobody can play thousands of dungeons by hand to check.</p>
-<p>So I built an AI player: a program that plays the game the way a strong human would. It's a classic kind of AI called an expert system. Its strategy is written by hand, rule by rule, from how I play the game myself, so every move it makes can be read and explained.</p>
-<p>Give it an item's new stats and it plays thousands of dungeons, then reports how the item did and why.</p>
-<p>I also designed and built about twenty relics, each starting from just a name and an icon, and a new dungeon area with six enemies and a status effect of its own.</p>
+<p>Give it an item's new stats and it <b>plays thousands of dungeons</b>, then reports how the item did and why.</p>
+<p>I also designed relics and enemy encounters for the game, and designed and built the prototype of a second studio project, which went unreleased.</p>
+<div class="cta">
+<a class="btn btn-line" href="https://degendungeons.com/crawler">Play Degen Crawler in the browser</a>
+</div>
 </div>
 </div>
 </div>
 </section>
 
-<section id="contact" class="screen reveal">
+<section id="contact" class="screen band reveal">
 <div class="wrap closing">
 <figure>
 <img src="media/dani-720.jpg" width="720" height="720" alt="Dani Caballero Mélich" loading="lazy" decoding="async">
-<figcaption><b>Dani Caballero Mélich</b>Gameplay programmer · Barcelona</figcaption>
+<figcaption><b>Dani Caballero Mélich</b>AI Engineer · Gameplay programmer · Barcelona</figcaption>
 </figure>
 <div>
 <h2><span class="ln">Making a <span class="w-game">game</span>?</span> <span class="ln">Building with <span class="w-ai">AI agents</span>?</span> <span class="ln">I'd like to hear about it.</span></h2>
 <div class="cta">
-<a class="btn btn-solid" href="mailto:dani.caballero.m@gmail.com">Contact me</a>
+<a class="btn btn-solid" href="https://www.linkedin.com/in/dani-caballero-melich" target="_blank" rel="noopener">Contact me on LinkedIn</a>
 </div>
-<p class="fine">Or write to <a href="mailto:dani.caballero.m@gmail.com">dani.caballero.m@gmail.com</a>. I'm open to gameplay programming and AI engineering roles, in Barcelona or remote. EU citizen.</p>
-<p class="fine"><a href="https://github.com/DaniMelich">GitHub</a> · <a href="https://www.linkedin.com/in/dani-caballero-melich">LinkedIn</a></p>
+<p class="fine">Or write to <a href="mailto:dani.caballero.m@gmail.com">dani.caballero.m@gmail.com</a>.</p>
 </div>
 </div>
 </section>
@@ -612,6 +870,10 @@ window.addEventListener('load', function () {
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
   }
+
+  /* tutorial strip: 82 cells, the first 31 done, the next one is where a returning player resumes */
+  var ts = document.getElementById('tut-steps');
+  if (ts) { for (var i = 0; i < 82; i++) { var c = document.createElement('i'); if (i < 31) c.className = 'done'; else if (i === 31) c.className = 'now'; ts.appendChild(c); } }
 
   /* shift-log terminal: rows appear as the clock runs between data-start and data-end, once the card is on screen */
   document.querySelectorAll('.term[data-run]').forEach(function (term) {
@@ -653,6 +915,83 @@ window.addEventListener('load', function () {
     }, { threshold: 0.35 });
     tio.observe(term);
   });
+})();
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.deck').forEach(function (deck) {
+    var items = Array.prototype.slice.call(deck.children), n = items.length;
+    if (n < 4) return;
+    var i = 0, timer = null, visible = false;
+    var every = parseInt(deck.getAttribute('data-interval'), 10) || 3000;
+    deck.classList.add('js');
+    function at(k) { return items[((k % n) + n) % n]; }
+    function play(el, on) {
+      if (el.tagName !== 'VIDEO') return;
+      if (on && !reduce) { var p = el.play(); if (p && p.catch) p.catch(function () {}); }
+      else el.pause();
+    }
+    // the next card waits on the right, so every step moves the row to the left
+    function paint(out) {
+      var c = at(i), l = at(i - 1), r = at(i + 1);
+      items.forEach(function (el) {
+        el.classList.toggle('is-center', el === c);
+        el.classList.toggle('is-left', el === l);
+        el.classList.toggle('is-right', el === r);
+        el.classList.toggle('is-out', el === out);
+        if (el === c || el === l || el === r) {
+          if (el.tagName === 'IMG') el.loading = 'eager';
+          else if (el.preload === 'none') el.preload = 'metadata';
+        }
+        play(el, visible && el === c);
+      });
+      if (out) setTimeout(function () { out.classList.remove('is-out'); }, 850);
+    }
+    function step(d) { var out = d > 0 ? at(i - 1) : null; i += d; paint(out); }
+    function run(on) {
+      clearInterval(timer); timer = null;
+      if (on && !reduce) timer = setInterval(function () { step(1); }, every);
+    }
+    deck.addEventListener('click', function (e) {
+      if (e.target.classList.contains('is-right')) { step(1); run(visible); }
+      else if (e.target.classList.contains('is-left')) { step(-1); run(visible); }
+    });
+    paint(null);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        visible = es[0].isIntersecting; paint(null); run(visible && !document.hidden);
+      }, { threshold: 0.25 }).observe(deck);
+    } else { visible = true; paint(null); run(true); }
+    document.addEventListener('visibilitychange', function () { run(visible && !document.hidden); });
+  });
+})();
+/* one wheel gesture = one section; CSS mandatory snap covers keys, touch and the scrollbar */
+(function () {
+  var mq = window.matchMedia('(min-width: 901px) and (min-height: 620px)');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var busyUntil = 0, lastWheel = 0;
+  function stops() { return Array.prototype.slice.call(document.querySelectorAll('.hero, .screen')); }
+  // offsetTop, not the bounding box: a section that has not revealed yet is still shifted by its entrance transform
+  function pageTop(el) { var y = 0; while (el) { y += el.offsetTop; el = el.offsetParent; } return y; }
+  function go(el) {
+    busyUntil = Date.now() + 650;
+    window.scrollTo({ top: pageTop(el), behavior: reduce ? 'auto' : 'smooth' });
+  }
+  window.addEventListener('wheel', function (e) {
+    if (!mq.matches || e.ctrlKey || Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+    var now = Date.now(), streak = now - lastWheel < 140;
+    lastWheel = now;
+    var list = stops(), vh = window.innerHeight, dir = e.deltaY > 0 ? 1 : -1, cur = 0;
+    list.forEach(function (el, k) { if (el.getBoundingClientRect().top <= vh * 0.5) cur = k; });
+    var r = list[cur].getBoundingClientRect();
+    // a section taller than the screen scrolls normally until its edge is reached
+    if (r.height > vh + 4 && ((dir > 0 && r.bottom > vh + 2) || (dir < 0 && r.top < -2))) return;
+    e.preventDefault();
+    // ignore the tail of the same gesture (trackpad inertia, a fast wheel spin)
+    if (now < busyUntil || (streak && now < busyUntil + 400)) return;
+    var target = list[cur + dir];
+    if (dir < 0 && r.top < -2 && r.height <= vh + 4) target = list[cur];
+    if (target) go(target);
+  }, { passive: false });
 })();
 </script>
 </body>
